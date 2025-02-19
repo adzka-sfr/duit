@@ -18,7 +18,7 @@ if ($user) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -36,7 +36,64 @@ if ($user) {
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#register').click(function() {
+                var username = $('#username').val();
+                var password = $('#password').val();
+                var email = $('#email').val();
+
+                // Reset error messages
+                $('#username-error').hide();
+                $('#password-error').hide();
+                $('#email-error').hide();
+
+                // Validate inputs
+                var isValid = true;
+                if (username === '') {
+                    $('#username-error').show();
+                    isValid = false;
+                }
+                if (password === '') {
+                    $('#password-error').show();
+                    isValid = false;
+                }
+                if (email === '') {
+                    $('#email-error').show();
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    $.ajax({
+                        url: '<?php echo base_url('auth/act_register.php'); ?>',
+                        type: 'POST',
+                        data: {
+                            username: username,
+                            password: password,
+                            email: email
+                        },
+                        success: function(response) {
+                            var response = JSON.parse(response);
+                            console.log(response.status);
+
+                            if (response.status == 'success') {
+                                window.location = '<?php echo base_url('auth/'); ?>';
+                            } else if (response.status == 'username_exist') {
+                                $('#username-error').hide();
+                                $('#username-exist').show();
+                            } else if (response.status == 'email_exist') {
+                                $('#email-error').hide();
+                                $('#email-exist').show();
+                            } else {
+                                alert('Failed to register. Please try again.');
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
