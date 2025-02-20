@@ -24,7 +24,7 @@ try {
 // base url
 function base_url($url = null)
 {
-    $base_url = "/home/u266480338/domains/adzkasfr.com/public_html/duit";
+    $base_url = "duit.adzkasfr.com";
     if ($url != null) {
         return $base_url . "/" . trim($url, "/");
     } else {
