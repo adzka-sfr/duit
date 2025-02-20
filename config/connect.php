@@ -22,27 +22,27 @@ try {
 }
 
 // base url
-// function base_url($url = null)
-// {
-//     $base_url = "//duit.adzkasfr.com/duit";
-//     if ($url != null) {
-//         return $base_url . "/" . trim($url, "/");
-//     } else {
-//         return $base_url;
-//     }
-// }
+function base_url($url = null)
+{
+    $base_url = "//localhost/duit";
+    if ($url != null) {
+        return $base_url . "/" . trim($url, "/");
+    } else {
+        return $base_url;
+    }
+}
 
-// // For including PHP files, use the server's document root
-// function base_path($path = null)
-// {
-//     $base_path = $_SERVER['DOCUMENT_ROOT'] . '/duit';
-//     if ($path != null) {
-//         return $base_path . '/' . trim($path, '/');
-//     } else {
-//         return $base_path;
-//     }
-// }
-// // tes git lewat git dekstop
+// For including PHP files, use the server's document root
+function base_path($path = null)
+{
+    $base_path = $_SERVER['DOCUMENT_ROOT'] . '/duit';
+    if ($path != null) {
+        return $base_path . '/' . trim($path, '/');
+    } else {
+        return $base_path;
+    }
+}
+// tes git lewat git dekstop
 
 
-// $key = 'adzkagacor';
+$key = 'adzkagacor';
