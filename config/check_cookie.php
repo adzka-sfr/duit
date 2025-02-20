@@ -15,8 +15,6 @@ function getUserFromJwt($jwt, $key)
         $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
         return (array) $decoded->data;
     } catch (Exception $e) {
-        // Log the exception message
-        error_log('JWT decoding error: ' . $e->getMessage());
         // Return null if decoding fails
         return null;
     }
