@@ -1,7 +1,7 @@
 <?php
 $cookie_name = "duit_token";
 $cookie_path = "/duit/"; // Must match the path used when setting the cookie
-$cookie_domain = "duit.adzkasfr.com"; // Set for production
+$cookie_domain = "duit.adzkasfr.com"; // Leave empty for localhost or set for production (e.g., "10.105.48.20")
 
 // Unset the cookie from the PHP superglobal array
 unset($_COOKIE[$cookie_name]);
