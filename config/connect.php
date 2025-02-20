@@ -4,15 +4,15 @@ date_default_timezone_set('Asia/Jakarta');
 $now = date('Y-m-d H:i:s');
 
 // Database connection parameters
-// $host = 'localhost';  // or your database host
-// $dbname = 'duit'; // your database name
-// $username = 'root';  // Replace with your MySQL username
-// $password = '';  // Replace with your MySQL password
+$host = 'localhost';  // local
+$dbname = 'duit'; // local
+$username = 'root';  // local
+$password = '';  // local
 
-$host = 'localhost';  // or your database host
-$dbname = 'u266480338_duit'; // your database name
-$username = 'u266480338_bismillahadzka';  // Replace with your MySQL username
-$password = 'Alfianwai1';  // Replace with your MySQL password
+// $host = 'localhost';  // hosting
+// $dbname = 'u266480338_duit'; // hosting
+// $username = 'u266480338_bismillahadzka';  // hosting
+// $password = 'Alfianwai1';  // hosting
 
 try {
     $connect = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -25,14 +25,16 @@ try {
 function base_url($path = '')
 {
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
-    $domain = $_SERVER['HTTP_HOST'];
+    $domain = $_SERVER['HTTP_HOST']. '/duit'; // local
+    // $domain = $_SERVER['HTTP_HOST']; // hosting
     return $protocol . "://" . $domain . "/" . ltrim($path, '/');
 }
 
 // For including PHP files, use the server's document root
 function base_path($path = null)
 {
-    $base_path = $_SERVER['DOCUMENT_ROOT'];
+    $base_path = $_SERVER['DOCUMENT_ROOT'].'/duit/'; // local
+    // $base_path = $_SERVER['DOCUMENT_ROOT']; // hosting
     if ($path != null) {
         return $base_path . '/' . trim($path, '/');
     } else {

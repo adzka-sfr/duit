@@ -1,6 +1,9 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/jwt/vendor/autoload.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/connect.php'; // local
+require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/assets/jwt/vendor/autoload.php'; // local
+
+// require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php'; // hosting
+// require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/jwt/vendor/autoload.php'; // hosting
 
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
@@ -22,7 +25,8 @@ if ($user) {
     if (password_verify($password, $user['c_password'])) {
         // Create the payload for the JWT
         $payload = [
-            'iss' => "https://duit.adzkasfr.com/", // Adjust for your setup
+            'iss' => "http://localhost/duit", // local
+            // 'iss' => "https://duit.adzkasfr.com/", // hosting
             'iat' => time(),
             'exp' => time() + (30 * 24 * 60 * 60), // 30 days expiration
             'data' => [
@@ -37,7 +41,8 @@ if ($user) {
         $jwt = JWT::encode($payload, $key, 'HS256');
 
         // Set the JWT in a cookie
-        setcookie("duit_token", $jwt, time() + (30 * 24 * 60 * 60), "/", "duit.adzkasfr.com", false, true);
+        setcookie("duit_token", $jwt, time() + (30 * 24 * 60 * 60), "/", "localhost", false, true); // local
+        // setcookie("duit_token", $jwt, time() + (30 * 24 * 60 * 60), "/", "duit.adzkasfr.com", false, true); // hosting
 
         // Redirect to the protected page
         echo "success";

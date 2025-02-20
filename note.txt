@@ -1,0 +1,14 @@
+do this :
+    - auth
+        1. act_logout.php
+        2. act_login.php
+        3. act_register.php
+        4. main.php
+    
+    - config
+        1. check_cookie.php
+        2. connect.php
+
+    - root
+        1. _header.php
+        2. index.php

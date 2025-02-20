@@ -1,5 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/connect.php'; // local
+// require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php'; // hosting
 
 // get data post
 $username = $_POST['username'];

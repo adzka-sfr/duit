@@ -1,5 +1,6 @@
 <?php
-require_once '/home/u266480338/domains/adzkasfr.com/public_html/duit/config/connect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/connect.php'; // local
+// require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php'; // hosting
 
 $user = require_once base_path('config/check_cookie.php');
 

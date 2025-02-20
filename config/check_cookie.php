@@ -1,6 +1,9 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/jwt/vendor/autoload.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/connect.php'; // local
+require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/assets/jwt/vendor/autoload.php'; // local
+
+// require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php'; // hosting
+// require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/jwt/vendor/autoload.php'; // hosting
 
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
