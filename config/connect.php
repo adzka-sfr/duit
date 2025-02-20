@@ -32,7 +32,7 @@ function base_url($path = '')
 // For including PHP files, use the server's document root
 function base_path($path = null)
 {
-    $base_path = '/home/u266480338/domains/adzkasfr.com/public_html/duit';
+    $base_path = $_SERVER['DOCUMENT_ROOT'];
     if ($path != null) {
         return $base_path . '/' . trim($path, '/');
     } else {
