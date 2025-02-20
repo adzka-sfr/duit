@@ -1,7 +1,7 @@
 <?php
 include '../_header.php';
 ?>
-<div class="container mt-3">
+<div class="container">
     <?php
 
     if (empty($_GET['page'])) {
@@ -27,7 +27,7 @@ include '../_header.php';
             <a href="main.php?page=settings" class="nav-link <?php echo ($_GET['page'] == 'settings') ? 'active' : ''; ?>" id="mail-link" style="color: <?php echo $user['theme']; ?>;"><i class="fa-solid fa-envelope"></i></a>
         </div>
         <div class="col text-center">
-            <a href="<?php echo base_url('auth/act_logout.php'); ?>" class="nav-link" id="notifications-link" style="color: <?php echo $user['theme']; ?>;"><i class="fa-solid fa-right-from-bracket"></i></a>
+            <a class="nav-link" id="logout-link" style="color: <?php echo $user['theme']; ?>;"><i class="fa-solid fa-right-from-bracket"></i></a>
         </div>
     </div>
 </footer>

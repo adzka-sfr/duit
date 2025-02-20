@@ -15,31 +15,6 @@
 
 <script>
     $(document).ready(function() {
-        // Initialize DataTables
-        $('#example').DataTable();
-
-        // Initialize Select2
-        $('.select2').select2();
-
-        // Initialize ECharts
-        var chart = echarts.init(document.getElementById('chart'));
-        var option = {
-            title: {
-                text: 'ECharts Example'
-            },
-            tooltip: {},
-            xAxis: {
-                data: ["category1", "category2", "category3", "category4", "category5"]
-            },
-            yAxis: {},
-            series: [{
-                name: 'Sales',
-                type: 'bar',
-                data: [5, 20, 36, 10, 10]
-            }]
-        };
-        chart.setOption(option);
-
         // Update the date
         setInterval(updateDateTime, 1000); // Update every second
         updateDateTime(); // Initial call
@@ -63,6 +38,22 @@
 
         $("#current-date-time").text(formattedDate + " " + timeString);
     }
+
+    // Logout
+    $("#logout-link").click(function() {
+        Swal.fire({
+            title: 'Logout',
+            text: 'Are you sure you want to logout?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, logout'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "../auth/act_logout.php";  }
+        });
+    });
 </script>
 </body>
 
