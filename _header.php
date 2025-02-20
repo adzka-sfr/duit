@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php';
-// require_once $_SERVER['DOCUMENT_ROOT'] . '/config/check_cookie.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config/check_cookie.php';
 
 // Assuming $user['theme'] is already set and contains the color code
 $themeColor = isset($user['theme']) ? $user['theme'] : '#007bff'; // Default to blue if not set
