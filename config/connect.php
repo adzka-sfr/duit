@@ -22,14 +22,11 @@ try {
 }
 
 // base url
-function base_url($url = null)
+function base_url($path = '')
 {
-    $base_url = "duit.adzkasfr.com";
-    if ($url != null) {
-        return $base_url . "/" . trim($url, "/");
-    } else {
-        return $base_url;
-    }
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
+    $domain = $_SERVER['HTTP_HOST'];
+    return $protocol . "://" . $domain . "/" . ltrim($path, '/');
 }
 
 // For including PHP files, use the server's document root
