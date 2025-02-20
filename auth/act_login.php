@@ -37,7 +37,7 @@ if ($user) {
         $jwt = JWT::encode($payload, $key, 'HS256');
 
         // Set the JWT in a cookie
-        setcookie("duit_token", $jwt, time() + (30 * 24 * 60 * 60), "//", "", false, true);
+        setcookie("duit_token", $jwt, time() + (30 * 24 * 60 * 60), "/", "duit.adzkasfr.com", false, true);
 
         // Redirect to the protected page
         echo "success";
