@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../config/connect.php';
-require_once __DIR__ . '/../assets/jwt/vendor/autoload.php';
+require_once '/config/connect.php';
+require_once '/assets/jwt/vendor/autoload.php';
 
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
