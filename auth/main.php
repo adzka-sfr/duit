@@ -48,6 +48,8 @@ if ($user) {
                 $('#username-error').hide();
                 $('#password-error').hide();
                 $('#email-error').hide();
+                $('#username-exist').hide();
+                $('#email-exist').hide();
 
                 // Validate inputs
                 var isValid = true;
@@ -92,6 +94,51 @@ if ($user) {
                     });
                 }
             });
+
+            $('#login').click(function() {
+
+                var username = $('#username').val();
+                var password = $('#password').val();
+
+                // Reset error messages
+                $('#username-error').hide();
+                $('#password-error').hide();
+                $('#username-not-exist').hide();
+
+                // Validate inputs
+                var isValid = true;
+                if (username === '') {
+                    $('#username-error').show();
+                    isValid = false;
+                }
+                if (password === '') {
+                    $('#password-error').show();
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    $.ajax({
+                        url: '<?php echo base_url('auth/act_login.php'); ?>',
+                        type: 'POST',
+                        data: {
+                            username: username,
+                            password: password
+                        },
+                        success: function(response) {
+                            if (response == 'success') {
+                                window.location = '<?php echo base_url('dashboard'); ?>';
+                            } else if (response == 'username-not-exist') {
+                                $('#username-error').hide();
+                                $('#username-not-exist').show();
+                            } else if (response == 'password-error') {
+                                $('#password-error').show();
+                            } else {
+                                alert('Failed to login. Please try again.');
+                            }
+                        }
+                    });
+                }
+            })
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
