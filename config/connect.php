@@ -33,15 +33,15 @@ function base_url($url = null)
 }
 
 // For including PHP files, use the server's document root
-// function base_path($path = null)
-// {
-//     $base_path = __DIR__;
-//     if ($path != null) {
-//         return $base_path . '/' . trim($path, '/');
-//     } else {
-//         return $base_path;
-//     }
-// }
+function base_path($path = null)
+{
+    $base_path = '/home/u266480338/domains/adzkasfr.com/public_html/duit';
+    if ($path != null) {
+        return $base_path . '/' . trim($path, '/');
+    } else {
+        return $base_path;
+    }
+}
 // tes git lewat git dekstop
 
 
