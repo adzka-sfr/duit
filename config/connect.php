@@ -4,10 +4,15 @@ date_default_timezone_set('Asia/Jakarta');
 $now = date('Y-m-d H:i:s');
 
 // Database connection parameters
+// $host = 'localhost';  // or your database host
+// $dbname = 'duit'; // your database name
+// $username = 'root';  // Replace with your MySQL username
+// $password = '';  // Replace with your MySQL password
+
 $host = 'localhost';  // or your database host
-$dbname = 'duit'; // your database name
-$username = 'root';  // Replace with your MySQL username
-$password = '';  // Replace with your MySQL password
+$dbname = 'u266480338_duit'; // your database name
+$username = 'u266480338_bismillahadzka';  // Replace with your MySQL username
+$password = 'Alfianwai1';  // Replace with your MySQL password
 
 try {
     $connect = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
