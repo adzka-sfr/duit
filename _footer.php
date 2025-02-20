@@ -1,22 +1,4 @@
-<footer class="footer fixed-bottom bg-light">
-    <div class="row" >
-        <div class="col text-center">
-            <a href="#" class="nav-link active" id="home-link" style="color: <?php echo $user['theme']; ?>;"><i class="fa-solid fa-house"></i></a>
-        </div>
-        <div class="col text-center">
-            <a href="#" class="nav-link" id="user-link" style="color: <?php echo $user['theme']; ?>;"><i class="fa-solid fa-user"></i></a>
-        </div>
-        <div class="col text-center">
-            <a href="#" class="nav-link" id="settings-link" style="color: <?php echo $user['theme']; ?>;"><i class="fa-solid fa-gear"></i></a>
-        </div>
-        <div class="col text-center">
-            <a href="#" class="nav-link" id="mail-link" style="color: <?php echo $user['theme']; ?>;"><i class="fa-solid fa-envelope"></i></a>
-        </div>
-        <div class="col text-center">
-            <a href="<?php echo base_url('auth/act_logout.php'); ?>" class="nav-link" id="notifications-link" style="color: <?php echo $user['theme']; ?>;"><i class="fa-solid fa-right-from-bracket"></i></a>
-        </div>
-    </div>
-</footer>
+
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -57,12 +39,6 @@
             }]
         };
         chart.setOption(option);
-
-        // Handle active link toggle
-        $('.footer .nav-link').on('click', function() {
-            $('.footer .nav-link').removeClass('active'); // Remove active from all links
-            $(this).addClass('active'); // Add active to the clicked link
-        });
 
         // Update the date
         setInterval(updateDateTime, 1000); // Update every second

@@ -12,6 +12,26 @@ include '../_header.php';
     ?>
 </div>
 
+<footer class="footer fixed-bottom bg-light">
+    <div class="row">
+        <div class="col text-center">
+            <a href="main.php?page=home" class="nav-link <?php echo ($_GET['page'] == 'home') ? 'active' : ''; ?>" id="home-link" style="color: <?php echo $user['theme']; ?>;"><i class="fa-solid fa-house"></i></a>
+        </div>
+        <div class="col text-center">
+            <a href="main.php?page=customize" class="nav-link <?php echo ($_GET['page'] == 'customize') ? 'active' : ''; ?>" id="user-link" style="color: <?php echo $user['theme']; ?>;"><i class="fa-solid fa-user"></i></a>
+        </div>
+        <div class="col text-center">
+            <a href="main.php?page=budget" class="nav-link <?php echo ($_GET['page'] == 'budget') ? 'active' : ''; ?>" id="settings-link" style="color: <?php echo $user['theme']; ?>;"><i class="fa-solid fa-gear"></i></a>
+        </div>
+        <div class="col text-center">
+            <a href="main.php?page=settings" class="nav-link <?php echo ($_GET['page'] == 'settings') ? 'active' : ''; ?>" id="mail-link" style="color: <?php echo $user['theme']; ?>;"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <div class="col text-center">
+            <a href="<?php echo base_url('auth/act_logout.php'); ?>" class="nav-link" id="notifications-link" style="color: <?php echo $user['theme']; ?>;"><i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+    </div>
+</footer>
+
 <?php
 include '../_footer.php';
 ?>
