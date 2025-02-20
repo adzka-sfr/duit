@@ -22,7 +22,7 @@ if ($user) {
     if (password_verify($password, $user['c_password'])) {
         // Create the payload for the JWT
         $payload = [
-            'iss' => "https://duit.adzkasfr.com/", // Adjust for your setup
+            'iss' => "https://adzkasfr.com/", // Adjust for your setup
             'iat' => time(),
             'exp' => time() + (30 * 24 * 60 * 60), // 30 days expiration
             'data' => [
