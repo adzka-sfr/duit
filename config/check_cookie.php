@@ -1,6 +1,6 @@
 <?php
-require_once '/config/connect.php';
-require_once '/assets/jwt/vendor/autoload.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/connect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/assets/jwt/vendor/autoload.php';
 
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
@@ -15,6 +15,8 @@ function getUserFromJwt($jwt, $key)
         $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
         return (array) $decoded->data;
     } catch (Exception $e) {
+        // Log the exception message
+        error_log('JWT decoding error: ' . $e->getMessage());
         // Return null if decoding fails
         return null;
     }
