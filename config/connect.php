@@ -9,7 +9,7 @@ $now = date('Y-m-d H:i:s');
 // $username = 'root';  // Replace with your MySQL username
 // $password = '';  // Replace with your MySQL password
 
-$host = 'srv1864.hstgr.io';  // or your database host
+$host = 'localhost';  // or your database host
 $dbname = 'u266480338_duit'; // your database name
 $username = 'u266480338_bismillahadzka';  // Replace with your MySQL username
 $password = 'Alfianwai1';  // Replace with your MySQL password
