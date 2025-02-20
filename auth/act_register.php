@@ -1,5 +1,5 @@
 <?php
-require_once '/home/u266480338/domains/adzkasfr.com/public_html/duit/config/connect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php';
 
 // get data post
 $username = $_POST['username'];
