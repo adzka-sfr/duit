@@ -28,7 +28,8 @@ if ($user) {
             'data' => [
                 'id' => $user['id'],
                 'username' => $user['c_username'],
-                'email' => $user['c_email']
+                'email' => $user['c_email'],
+                'theme' => $user['c_theme']
             ]
         ];
 
