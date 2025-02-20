@@ -1,6 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/connect.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/assets/jwt/vendor/autoload.php';
+require_once '/home/u266480338/domains/adzkasfr.com/public_html/duit/config/connect.php';
+require_once '/home/u266480338/domains/adzkasfr.com/public_html/duit/assets/jwt/vendor/autoload.php';
 
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
