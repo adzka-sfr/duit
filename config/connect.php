@@ -33,15 +33,15 @@ function base_url($url = null)
 }
 
 // For including PHP files, use the server's document root
-function base_path($path = null)
-{
-    $base_path = $_SERVER['DOCUMENT_ROOT'] . '/duit';
-    if ($path != null) {
-        return $base_path . '/' . trim($path, '/');
-    } else {
-        return $base_path;
-    }
-}
+// function base_path($path = null)
+// {
+//     $base_path = $_SERVER['DOCUMENT_ROOT'] . '/duit';
+//     if ($path != null) {
+//         return $base_path . '/' . trim($path, '/');
+//     } else {
+//         return $base_path;
+//     }
+// }
 // tes git lewat git dekstop
 
 
