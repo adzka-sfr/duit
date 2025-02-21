@@ -13,7 +13,8 @@ $themeColor = isset($user['theme']) ? $user['theme'] : '#007bff'; // Default to 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Duit</title>
+    <link rel="icon" href="<?php echo base_url('assets/images/robot_face.png'); ?>" type="image/png">
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Select2 CSS -->
@@ -24,8 +25,18 @@ $themeColor = isset($user['theme']) ? $user['theme'] : '#007bff'; // Default to 
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- FontAwesome CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
+        body {
+            /* font-family: 'Google Sans', sans-serif; */
+            font-family: 'Roboto', sans-serif;
+            background-color: #F2F2F7;
+            /* font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; */
+        }
+
         .footer .row {
             display: flex;
             justify-content: space-between;

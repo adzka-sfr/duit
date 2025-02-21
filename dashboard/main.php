@@ -1,7 +1,7 @@
 <?php
 include '../_header.php';
 ?>
-<div class="container">
+<div class="container pl-0 pr-0">
     <?php
 
     if (empty($_GET['page'])) {

@@ -1,7 +1,3 @@
-
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <!-- SweetAlert JS -->
@@ -51,9 +47,26 @@
             confirmButtonText: 'Yes, logout'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "../auth/act_logout.php";  }
+                window.location.href = "../auth/act_logout.php";
+            }
         });
     });
+
+    // Select2
+    $('.search-biasa').select2({
+        placeholder: "Select from below",
+        allowClear: false,
+        language: "id"
+    });
+
+    // function to limit the input just number
+    function validateInputJustNumber(event) {
+        const input = event.target.value;
+        const regex = /^[0-9.]*$/; // Regular expression to match numbers and dots
+        if (!regex.test(input)) {
+            event.target.value = input.slice(0, -1); // Remove the last character if it's not a number or dot
+        }
+    }
 </script>
 </body>
 
