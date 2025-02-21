@@ -1,6 +1,6 @@
 <div class="card mt-5">
     <div class="card-header text-center">
-        <h4>Register</h4>
+        <h4>Register to Duit <sub style="font-size: 0.3em;">by Adzka</sub></h4>
     </div>
     <div class="card-body">
         <div class="form-group">
