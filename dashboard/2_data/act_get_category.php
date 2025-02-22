@@ -36,7 +36,7 @@ if ($jwt === null) {
             ?>
                     <tr>
                         <td><?php echo $row['c_name']; ?></td>
-                        <td class="text-center"><?php echo $row['c_type']; ?></td>
+                        <td class="text-center <?php echo $row['c_type'] == 'pengeluaran' ? 'text-danger' : 'text-success'; ?>"><?php echo ucwords($row['c_type']); ?></td>
                         <td class="text-center">
                             <button type="button" onclick="editCategory('<?= $row['id'] ?>','<?= $row['c_name'] ?>','<?= $row['c_type'] ?>','<?= $row['c_status'] ?>')" class="btn btn-warning btn-sm">
                                 <i class="fas fa-edit"></i>

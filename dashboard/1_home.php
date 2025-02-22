@@ -61,7 +61,7 @@
                 </li>
             </ul>
         </div>
-        <div class="card-body" id="pengeluaran">
+        <div class="card-body" id="pengeluaran" style="display: none;">
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
@@ -156,7 +156,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body" id="pemasukan" style="display: none;">
+        <div class="card-body" id="pemasukan" >
             <div class="row">
                 <div class="col-12">
                     <div class="form-group">

@@ -170,19 +170,25 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
-                        <div class="form-check mt-2">
-                            <input class="form-check-input" type="checkbox" id="edit-status" name="edit-status">
-                            <label class="form-check-label" for="edit-status">
-                                Gunakan pada aplikasi
-                            </label>
+                    <div class="col-12 mt-3">
+                        <div class="form-group input-group-sm">
+                            <label for="edit-status">Status</label>
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="edit-status" name="edit-status">
+                                <label class="form-check-label" for="edit-status">
+                                    Gunakan pada aplikasi
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" id="delete-category" class="btn btn-danger btn-sm">
+                    Hapus
+                </button>
                 <button type="button" id="save-edit-category" class="btn btn-primary btn-sm">
-                    Save
+                    Simpan
                 </button>
             </div>
         </div>
@@ -225,6 +231,9 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" id="delete-method" class="btn btn-danger btn-sm">
+                    Hapus
+                </button>
                 <button type="button" id="save-edit-method" class="btn btn-primary btn-sm">
                     Save
                 </button>
@@ -549,5 +558,131 @@
                 }
             });
         }
+    });
+
+    // function to delete category
+    $("#delete-category").click(function() {
+        var catId = $("#edit-cat-id").val();
+
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Penghapusan hanya bisa dilakukan jika tidak ada transaksi yang menggunakan kategori ini!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "2_data/act_delete_category.php",
+                    type: "POST",
+                    data: {
+                        catId: catId
+                    },
+                    success: function(response) {
+                        if (response == "success") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil',
+                                text: 'Kategori berhasil dihapus!',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    $('#modal-edit-kategori').modal('hide');
+                                    getCategory();
+                                }
+                            });
+                        } else if (response == "used") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Kategori tidak bisa dihapus karena sudah digunakan dalam transaksi!',
+                            });
+                        } else if (response == "cookie_expired") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Sesi telah berakhir, silahkan login kembali!',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Terjadi kesalahan saat menghapus kategori!',
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    });
+
+    // function to delete method
+    $("#delete-method").click(function() {
+        var methodId = $("#edit-method-id").val();
+
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Penghapusan hanya bisa dilakukan jika tidak ada transaksi yang menggunakan metode ini!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "2_data/act_delete_method.php",
+                    type: "POST",
+                    data: {
+                        methodId: methodId
+                    },
+                    success: function(response) {
+                        console.log(response);
+
+                        if (response == "success") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil',
+                                text: 'Metode pembayaran berhasil dihapus!',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    $('#modal-edit-metode').modal('hide');
+                                    getMethod();
+                                }
+                            });
+                        } else if (response == "used") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Metode pembayaran tidak bisa dihapus karena sudah digunakan dalam transaksi!',
+                            });
+                        } else if (response == "cookie_expired") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Sesi telah berakhir, silahkan login kembali!',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Terjadi kesalahan saat menghapus metode pembayaran!',
+                            });
+                        }
+                    }
+                });
+            }
+        });
     });
 </script>
