@@ -54,7 +54,7 @@
 
     // Select2
     $('.search-biasa').select2({
-        placeholder: "Select from below",
+        placeholder: "Pilih salah satu",
         allowClear: false,
         language: "id"
     });

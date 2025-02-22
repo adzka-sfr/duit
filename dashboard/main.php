@@ -27,12 +27,12 @@ include '../_header.php';
         </div>
         <div class="col text-center">
             <a href="main.php?page=budget" class="nav-link <?php echo ($_GET['page'] == 'budget') ? 'active' : ''; ?>" id="settings-link" style="color: <?php echo $user['theme']; ?>;">
-                <i class="fa-solid fa-gear"></i>
+                <i class="fa-solid fa-hand-holding-dollar"></i>
             </a>
         </div>
         <div class="col text-center">
             <a href="main.php?page=settings" class="nav-link <?php echo ($_GET['page'] == 'settings') ? 'active' : ''; ?>" id="mail-link" style="color: <?php echo $user['theme']; ?>;">
-                <i class="fa-solid fa-envelope"></i>
+                <i class="fa-solid fa-gear"></i>
             </a>
         </div>
         <div class="col text-center">
