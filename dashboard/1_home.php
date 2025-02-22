@@ -56,23 +56,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#pengeluaran" data-toggle="tab">Pemasukan</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#topup" data-toggle="tab">Top Up</a>
+                </li>
             </ul>
         </div>
-        <div class="card-body">
+        <div class="card-body" id="pengeluaran">
             <div class="row">
-                <div class="col-12">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Nominal</label>
-                        <input class="form-control" type="text" oninput="validateInputJustNumber(event)" name="start" id="start-hat">
-                        <span id="error-start-hat" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan memasukkan waktu start</span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
+                <div class="col-6">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Kategori</label>
-                        <select class="search-biasa" style="width: 100%;" name="dept-set" id="dept-set">
+                        <select class="search-biasa" style="width: 100%;height:100px" name="category-out" id="category-out">
                             <option value=""></option>
                             <option value="40300">Transportasi</option>
                             <option value="40600">Makan</option>
@@ -93,13 +87,45 @@
                         <span id="error-start-hat" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan memasukkan waktu start</span>
                     </div>
                 </div>
+                <div class="col-6">
+                    <div class="form-group input-group-sm">
+                        <label for="exampleInputEmail1">Anggaran</label>
+                        <input class="form-control text-danger" disabled type="text" value="-350,000" name="budget" id="budget">
+                        <span id="error-start-hat" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan memasukkan waktu start</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Metode</label>
+                        <select class="search-biasa" style="width: 100%;" name="method-out" id="method-out">
+                            <option value=""></option>
+                            <option value="cash">Cash</option>
+                            <option value="credit_card">Credit Card</option>
+                            <option value="debit_card">Debit Card</option>
+                            <option value="bank_transfer">Bank Transfer</option>
+                            <option value="ewallet">E-Wallet</option>
+                        </select>
+                        <span id="error-start-hat" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan memasukkan waktu start</span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group input-group-sm">
+                        <label for="exampleInputEmail1">Saldo</label>
+                        <input class="form-control text-danger" disabled type="text" value="-350,000" name="saldo" id="saldo">
+                        <span id="error-start-hat" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan memasukkan waktu start</span>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Waktu</label>
-                        <input class="form-control" type="datetime-local" name="start" id="start-hat">
-                        <span id="error-start-hat" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan memasukkan waktu start</span>
+                    <div class="mb-3">
+                        <label for="basic-url" class="form-label">Nominal</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon3">Rp</span>
+                            <input type="number" class="form-control" oninput="validateInputJustNumber(event)" id="nominal-input" aria-describedby="basic-addon3 basic-addon4">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -110,6 +136,77 @@
                         <textarea name="detail" id="detail" class="form-control"></textarea>
                         <span id="error-start-hat" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan memasukkan waktu start</span>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Waktu</label>
+                        <input class="form-control" type="datetime-local" name="start" id="start-hat">
+                        <span id="error-start-hat" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan memasukkan waktu start</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 text-center">
+                    <button class="btn btn-secondary btn-sm" style="width: 80%;">Cancel</button>
+                </div>
+                <div class="col-6 text-center">
+                    <button class="btn btn-primary btn-sm" style="width: 80%;">Save</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" id="pemasukan" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Kategori</label>
+                        <select class="search-biasa" style="width: 100%;" name="dept-set" id="dept-set">
+                            <option value=""></option>
+                            <option value="10100">Gaji</option>
+                            <option value="10200">Bonus</option>
+                            <option value="10300">Investasi</option>
+                            <option value="10400">Lain-lain</option>
+                        </select>
+                        <span id="error-start-hat" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan memasukkan waktu start</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label for="basic-url" class="form-label">Nominal</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon3">Rp</span>
+                            <input type="number" class="form-control" oninput="validateInputJustNumber(event)" id="nominal-input" aria-describedby="basic-addon3 basic-addon4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Detail</label>
+                        <textarea name="detail" id="detail" class="form-control"></textarea>
+                        <span id="error-start-hat" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan memasukkan waktu start</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Waktu</label>
+                        <input class="form-control" type="datetime-local" name="start" id="start-hat">
+                        <span id="error-start-hat" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan memasukkan waktu start</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 text-center">
+                    <button class="btn btn-secondary btn-sm" style="width: 80%;">Cancel</button>
+                </div>
+                <div class="col-6 text-center">
+                    <button class="btn btn-primary btn-sm" style="width: 80%;">Save</button>
                 </div>
             </div>
         </div>
@@ -216,7 +313,7 @@
 
 <hr style="margin-bottom: 50px;">
 
-<button class="btn btn-primary btn-floating" id="add-data" style="position: fixed; bottom: 80px; right: 20px; background-color: <?= $user['theme'] ?>; border-color: <?= $user['theme'] ?>;">
+<button class="btn btn-primary btn-floating" id="add-data" style="position: fixed; bottom: 80px; right: 20px;">
     <i class="fa fa-plus"></i>
 </button>
 

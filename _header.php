@@ -16,7 +16,7 @@ $themeColor = isset($user['theme']) ? $user['theme'] : '#007bff'; // Default to 
     <title>Duit</title>
     <link rel="icon" href="<?php echo base_url('assets/images/robot_face.png'); ?>" type="image/png">
     <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Select2 CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
     <!-- DataTables CSS -->
@@ -28,7 +28,7 @@ $themeColor = isset($user['theme']) ? $user['theme'] : '#007bff'; // Default to 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;700&display=swap" rel="stylesheet">
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <style>
         body {
             /* font-family: 'Google Sans', sans-serif; */
@@ -64,6 +64,11 @@ $themeColor = isset($user['theme']) ? $user['theme'] : '#007bff'; // Default to 
 
         .navbar {
             background-color: <?php echo $themeColor; ?> !important;
+        }
+
+        .btn-primary {
+            background-color: <?php echo $themeColor; ?> !important;
+            border-color: <?php echo $themeColor; ?> !important;
         }
     </style>
 </head>
