@@ -39,7 +39,7 @@
 </div>
 
 <!-- modal tambah kategori -->
-<div class="modal fade" id="modal-tambah-kategori" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-tambah-kategori" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -80,6 +80,21 @@
                             </div>
                             <span id="error-type" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan pilih salah satu</span>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Kategori</label>
+                            <select class="search-biasa" style="width: 100%;" name="cat-icon" id="cat-icon">
+                            </select>
+                            <span id="error-cat-icon" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan pilih kategori</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mt-3 text-center">
+                        <i id="selected-icon" class="fas fa-icons" style="font-size: 1.5em;"></i>
                     </div>
                 </div>
             </div>
@@ -246,6 +261,7 @@
     $(document).ready(function() {
         $(" #add-category").click(function() {
             $('#modal-tambah-kategori').modal('show');
+            getIconList();
         });
 
         $("#add-method").click(function() {
@@ -684,5 +700,26 @@
                 });
             }
         });
+    });
+
+    // function to get list icon
+    function getIconList() {
+        $.ajax({
+            url: "2_data/act_get_icon.php",
+            type: "POST",
+            success: function(response) {
+                $("#cat-icon").html(response);
+                // Initialize select2 after loading the icons
+                $('#cat-icon').select2({
+                    dropdownParent: $('#modal-tambah-kategori')
+                });
+            }
+        });
+    }
+
+    // function to preview icon
+    $("#cat-icon").change(function() {
+        var icon = $("#cat-icon").val();
+        $("#selected-icon").attr('class', 'fas ' + icon);
     });
 </script>
