@@ -590,6 +590,7 @@
                     $('#data-report').toggle();
                     $('#add-data').toggle();
                     getKekayaan();
+                    getDataReport();
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -681,6 +682,7 @@
                     $('#data-report').toggle();
                     $('#add-data').toggle();
                     getKekayaan();
+                    getDataReport();
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -760,6 +762,7 @@
                     $('#data-report').toggle();
                     $('#add-data').toggle();
                     getKekayaan();
+                    getDataReport();
                 } else {
                     Swal.fire({
                         icon: 'error',
