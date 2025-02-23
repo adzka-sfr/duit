@@ -25,7 +25,7 @@ try {
 function base_url($path = '')
 {
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
-    $domain = $_SERVER['HTTP_HOST']. '/duit'; // local
+    $domain = $_SERVER['HTTP_HOST'] . '/duit'; // local
     // $domain = $_SERVER['HTTP_HOST']; // hosting
     return $protocol . "://" . $domain . "/" . ltrim($path, '/');
 }
@@ -33,7 +33,7 @@ function base_url($path = '')
 // For including PHP files, use the server's document root
 function base_path($path = null)
 {
-    $base_path = $_SERVER['DOCUMENT_ROOT'].'/duit/'; // local
+    $base_path = $_SERVER['DOCUMENT_ROOT'] . '/duit/'; // local
     // $base_path = $_SERVER['DOCUMENT_ROOT']; // hosting
     if ($path != null) {
         return $base_path . '/' . trim($path, '/');
@@ -45,3 +45,28 @@ function base_path($path = null)
 
 
 $key = 'adzkagacor';
+
+$hari = [
+    'Sunday' => 'Minggu',
+    'Monday' => 'Senin',
+    'Tuesday' => 'Selasa',
+    'Wednesday' => 'Rabu',
+    'Thursday' => 'Kamis',
+    'Friday' => 'Jumat',
+    'Saturday' => 'Sabtu'
+];
+
+$bulan = [
+    'January' => 'Januari',
+    'February' => 'Februari',
+    'March' => 'Maret',
+    'April' => 'April',
+    'May' => 'Mei',
+    'June' => 'Juni',
+    'July' => 'Juli',
+    'August' => 'Agustus',
+    'September' => 'September',
+    'October' => 'Oktober',
+    'November' => 'November',
+    'December' => 'Desember'
+];

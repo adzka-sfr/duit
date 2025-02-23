@@ -264,80 +264,7 @@
 </div>
 
 <div id="data-report">
-    <?php
-    for ($i = 30; $i > 0; $i--) {
-    ?>
-        <div class="card mt-2" style="padding-left: 0px; padding-right: 0px;">
-            <div class="card-body">
-                <table style="width: 100%;">
-                    <tr>
-                        <th class="align-middle" style="font-size: 2em; padding-left: 0px; padding-right: 10px; width: 5%; text-align: center;">
-                            <?= $i ?>
-                        </th>
-                        <td class="align-middle" style="padding-left: 10px; padding-right: 0px;">
-                            <div class="row">
-                                <div class="col-12" style="font-size: 0.8em; color: darkgrey;">
-                                    Monday
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12" style="font-size: 0.8em; color: darkgrey;">
-                                    Juni 2024
-                                </div>
-                            </div>
-                        </td>
-                        <th class="align-top" style="text-align: right; padding-left: 0px; padding-right: 0px;">
-                            -723,000
-                        </th>
-                    </tr>
 
-                    <tr>
-                        <th class="align-middle" style="font-size: 2em; padding-left: 0px; padding-right: 10px; width: 5%; text-align: center">
-                            <i class="fa-solid fa-bus"></i>
-                        </th>
-                        <td class="align-top" style="padding-left: 10px; padding-right: 0px;">
-                            <div class="row">
-                                <div class="col-12" style="font-size: 0.8em;">
-                                    Transportasi
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12" style="font-size: 0.8em; color: darkgrey;">
-                                    Perjalanan ke kantor
-                                </div>
-                            </div>
-                        </td>
-                        <th class="align-top text-danger" style="text-align: right; padding-left: 0px; padding-right: 0px; font-size: 0.8em;">
-                            3,000
-                        </th>
-                    </tr>
-
-                    <tr>
-                        <th class="align-middle" style="font-size: 2em; padding-left: 0px; padding-right: 10px; width: 5%; text-align: center">
-                            <i class="fa-solid fa-utensils"></i>
-                        </th>
-                        <td class="align-top" style="padding-left: 10px; padding-right: 0px;">
-                            <div class="row">
-                                <div class="col-12" style="font-size: 0.8em;">
-                                    Makan
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12" style="font-size: 0.8em; color: darkgrey;">
-                                    Warteg kharisma bahari
-                                </div>
-                            </div>
-                        </td>
-                        <th class="align-top text-danger" style="text-align: right; padding-left: 0px; padding-right: 0px; font-size: 0.8em;">
-                            20,000
-                        </th>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    <?php
-    }
-    ?>
 </div>
 
 <hr style="margin-bottom: 50px;">
@@ -349,6 +276,7 @@
 <script>
     $(document).ready(function() {
         getKekayaan();
+        getDataReport();
 
         $('#add-data').click(function() {
             $('#data-input').toggle();
@@ -411,6 +339,17 @@
                 } else {
                     $('#difference-balance').html('<sup>Rp</sup> ' + difference.toLocaleString('en-US')).removeClass('text-success text-danger');
                 }
+            }
+        });
+    }
+
+    // function to get data report
+    function getDataReport() {
+        $.ajax({
+            url: '1_data/get_report.php',
+            type: 'POST',
+            success: function(response) {
+                $('#data-report').html(response);
             }
         });
     }
@@ -831,4 +770,10 @@
             }
         });
     });
+
+    // function to open detail transaction
+    function openDetailTransaction(id, status) {
+        console.log(id, status);
+
+    }
 </script>
