@@ -7,7 +7,7 @@
         </div>
         <div class="row">
             <div class="col-12 text-center mb-3">
-                <h3><sup>Rp</sup> 1,456,445 </h3>
+                <h3 id='kekayaan'><sup>Rp</sup> 0 </h3>
             </div>
         </div>
         <div class="row">
@@ -24,11 +24,11 @@
                 <table style="width: 100%; border-collapse: collapse;">
                     <tr style="margin: 0; padding: 0;">
                         <td style="margin: 0; padding: 0;">Saldo awal</td>
-                        <td style="text-align: right; margin: 0; padding: 0;">213,432,122</td>
+                        <td style="text-align: right; margin: 0; padding: 0;" id="last-month-balance"></td>
                     </tr>
                     <tr style="margin: 0; padding: 0;">
                         <td style="margin: 0; padding: 0;">Saldo akhir</td>
-                        <td style="text-align: right; margin: 0; padding: 0;">432,122</td>
+                        <td style="text-align: right; margin: 0; padding: 0;" id="this-month-balance"></td>
                     </tr>
                     <tr style="margin: 0; padding: 0;">
                         <td style="margin: 0; padding: 0;"></td>
@@ -38,7 +38,7 @@
                     </tr>
                     <tr style="margin: 0; padding: 0;">
                         <td style="margin: 0; padding: 0;"></td>
-                        <th style="text-align: right; margin: 0; padding: 0;">-213,000,000</th>
+                        <th style="text-align: right; margin: 0; padding: 0;" id="difference-balance"></th>
                     </tr>
                 </table>
             </div>
@@ -348,6 +348,8 @@
 
 <script>
     $(document).ready(function() {
+        getKekayaan();
+
         $('#add-data').click(function() {
             $('#data-input').toggle();
             $('#data-report').toggle();
@@ -362,6 +364,22 @@
             $('#data-input').toggle();
             $('#data-report').toggle();
             $('#add-data').toggle();
+
+            // clear all field
+            $('#budget').val('');
+            $('#saldo').val('');
+            $('#nominal-out').val('');
+            $('#detail-out').val('');
+            $('#time-out').val('');
+            $('#nominal-in').val('');
+            $('#detail-in').val('');
+            $('#time-in').val('');
+            $('#nominal-topup').val('');
+            $('#time-topup').val('');
+            $('#saldo-from').val('');
+            $('#saldo-to').val('');
+            $('#topup-to').html('<option value="">Pilih metode</option>');
+            $('#topup-to').prop('disabled', true);
         });
 
         $('.nav-link.nav-input').click(function() {
@@ -373,6 +391,29 @@
             getDateTime();
         });
     });
+
+    // function to get kekayaan
+    function getKekayaan() {
+        $.ajax({
+            url: '1_data/get_kekayaan.php',
+            type: 'POST',
+            success: function(response) {
+                var response = JSON.parse(response);
+                var formattedKekayaan = parseInt(response.kekayaan).toLocaleString('en-US');
+                $('#kekayaan').html('<sup>Rp</sup> ' + formattedKekayaan);
+                $('#last-month-balance').html('<sup>Rp</sup> ' + parseInt(response.last_month_balance).toLocaleString('en-US'));
+                $('#this-month-balance').html('<sup>Rp</sup> ' + parseInt(response.this_month_balance).toLocaleString('en-US'));
+                var difference = parseInt(response.this_month_balance) - parseInt(response.last_month_balance);
+                if (difference > 0) {
+                    $('#difference-balance').html('<sup>Rp</sup> ' + difference.toLocaleString('en-US')).addClass('text-success').removeClass('text-danger');
+                } else if (difference < 0) {
+                    $('#difference-balance').html('<sup>Rp</sup> ' + difference.toLocaleString('en-US')).addClass('text-danger').removeClass('text-success');
+                } else {
+                    $('#difference-balance').html('<sup>Rp</sup> ' + difference.toLocaleString('en-US')).removeClass('text-success text-danger');
+                }
+            }
+        });
+    }
 
     // function to get list of category
     function getCategory(type) {
@@ -609,6 +650,7 @@
                     $('#data-input').toggle();
                     $('#data-report').toggle();
                     $('#add-data').toggle();
+                    getKekayaan();
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -699,6 +741,7 @@
                     $('#data-input').toggle();
                     $('#data-report').toggle();
                     $('#add-data').toggle();
+                    getKekayaan();
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -777,6 +820,7 @@
                     $('#data-input').toggle();
                     $('#data-report').toggle();
                     $('#add-data').toggle();
+                    getKekayaan();
                 } else {
                     Swal.fire({
                         icon: 'error',
