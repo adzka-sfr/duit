@@ -36,6 +36,11 @@ include '../_header.php';
             </a>
         </div>
         <div class="col text-center">
+            <a href="main.php?page=info" class="nav-link <?php echo ($_GET['page'] == 'info') ? 'active' : ''; ?>" id="mail-link" style="color: <?php echo $user['theme']; ?>;">
+                <i class="fa-solid fa-circle-info"></i>
+            </a>
+        </div>
+        <div class="col text-center">
             <a class="nav-link" id="logout-link" style="color: <?php echo $user['theme']; ?>;"><i class="fa-solid fa-right-from-bracket"></i></a>
         </div>
     </div>

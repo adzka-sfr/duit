@@ -1,6 +1,11 @@
 <div class="card mb-3 mt-3" style="padding-left: 0px; padding-right: 0px;">
     <div class="card-body">
         <div class="row">
+            <div class="col-12">
+                <h5 class="card-title">Anggaran</h5>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-12 text-right">
                 <input type="month" name="month" id="month" class="form-control" value="<?php echo date('Y-m'); ?>">
             </div>
