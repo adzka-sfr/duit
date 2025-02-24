@@ -12,10 +12,11 @@
             <label for="email">Email</label>
             <input type="text" name="email" id="email" class="form-control" required>
             <small class="text-danger" id="email-error" style="display: none;">Email wajib diisi</small>
+            <small class="text-danger" id="email-not-exist" style="display: none;">Email tidak terdaftar</small>
         </div>
         <div class="row">
             <div class="col-12 text-center mt-3">
-                <button class="btn btn-primary btn-block" id="register">Reset</button>
+                <button class="btn btn-primary btn-block" id="reset-akun">Reset</button>
             </div>
         </div>
         <div class="form-group text-center mt-3">

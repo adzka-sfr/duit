@@ -166,6 +166,48 @@ if ($user) {
                     }
                 }
             });
+
+            $('#reset-akun').click(function() {
+                var email = $('#email').val();
+
+                // Reset error messages
+                $('#email-error').hide();
+                $('#email-not-exist').hide();
+
+                // Validate inputs
+                var isValid = true;
+                if (email === '') {
+                    $('#email-error').show();
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    $.ajax({
+                        url: '<?php echo base_url('auth/act_reset.php'); ?>',
+                        type: 'POST',
+                        data: {
+                            email
+                        },
+                        success: function(response) {
+                            if (response == 'success') {
+                                Swal.fire({
+                                    title: 'Reset akun berhasil!',
+                                    text: 'Silahkan cek email untuk melanjutkan',
+                                    icon: 'success',
+                                    showConfirmButton: true,
+                                    confirmButtonText: 'Ok'
+                                }).then(function() {
+                                    window.location = '<?php echo base_url('auth/'); ?>';
+                                });
+                            } else if (response == 'email-not-exist') {
+                                $('#email-not-exist').show();
+                            } else {
+                                alert('Failed to reset account. Please try again.');
+                            }
+                        }
+                    });
+                }
+            });
         });
     </script>
 
