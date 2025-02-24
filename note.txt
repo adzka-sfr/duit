@@ -22,7 +22,6 @@ email : information_system@duit.adzkasfr.com
 password : Alfianwai1!
 
 
-buat modal untuk edit inputan
 buat report grafik dan persentase
 buat loading
 buat cursor pointer

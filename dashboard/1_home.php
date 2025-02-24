@@ -97,7 +97,6 @@
                     <div class="form-group input-group-sm">
                         <label for="exampleInputEmail1">Saldo</label>
                         <input class="form-control" disabled type="text" name="saldo" id="saldo" style="text-align: right;">
-                        <span id="error-start-hat" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan memasukkan waktu start</span>
                     </div>
                 </div>
             </div>
@@ -557,6 +556,8 @@
         });
     }
 
+    
+
     // function to get saldo topup
     function getSaldoTopup(id, type) {
         var methode = $('#topup-' + type).val();
@@ -820,6 +821,16 @@
             $('#error-time-topup').hide();
         }
 
+        var saldoFrom = parseInt($('#saldo-from').val().replace(/,/g, ''));
+        if (saldoFrom - nominal < 0) {
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            html: 'Saldo tidak mencukupi!',
+            });
+            return;
+        }
+
         $.ajax({
             url: '1_data/save_topup.php',
             type: 'POST',
@@ -978,6 +989,8 @@
     // function to update transaction
     $('#update-transaction').click(function() {
         var id = $('#id-transaction').val();
+        var category = $('#category-transaction').val();
+        var methode = $('#method-transaction').val();
         var statuse = $('#statuse-transaction').val();
         var nominal = $('#nominal-transaction').val();
         var detail = $('#detail-transaction').val();
@@ -1017,11 +1030,23 @@
             $('#error-time-transaction').hide();
         }
 
+        var saldo = parseInt($('#saldo-transaction').val().replace(/,/g, ''));
+        if (saldo - nominal < 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                html: 'Saldo tidak mencukupi!',
+            });
+            return;
+        }
+
         $.ajax({
             url: '1_data/update_transaction.php',
             type: 'POST',
             data: {
                 id: id,
+                category: category,
+                methode: methode,
                 statuse: statuse,
                 nominal: nominal,
                 detail: detail,
@@ -1041,4 +1066,6 @@
             }
         });
     });
+
+    
 </script>
