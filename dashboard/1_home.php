@@ -277,16 +277,36 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title fs-5" id="exampleModalLabel">Saldo anda</h5>
+                <h5 class="modal-title fs-5" id="exampleModalLabel">Saldo Anda</h5>
 
             </div>
             <div class="modal-body" id="data-value-saldo">
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
                     Close
                 </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal lihat transaksi -->
+<div class="modal fade" id="modal-lihat-transaksi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="exampleModalLabel">Transaksi <b id="date-transaksi"></b></h5>
+            </div>
+            <div class="modal-body" id="data-value-transaksi">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" id="update-transaction">Save</button>
             </div>
         </div>
     </div>
@@ -840,9 +860,20 @@
     });
 
     // function to open detail transaction
-    function openDetailTransaction(id, status) {
-        console.log(id, status);
-
+    function openDetailTransaction(id, statuse, date) {
+        $('#modal-lihat-transaksi').modal('show');
+        $('#date-transaksi').html(date);
+        $.ajax({
+            url: '1_data/get_detail_transaction.php',
+            type: 'POST',
+            data: {
+                id: id,
+                statuse: statuse
+            },
+            success: function(response) {
+                $('#data-value-transaksi').html(response);
+            }
+        });
     }
 
     // function to move bulan lalu
@@ -897,6 +928,116 @@
             type: 'POST',
             success: function(response) {
                 $('#data-value-saldo').html(response);
+            }
+        });
+    });
+
+    // function to delete transaction
+    function deleteTransaction(id, statuse) {
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Data yang dihapus tidak dapat dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '1_data/delete_transaction.php',
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        statuse: statuse
+                    },
+                    success: function(response) {
+                        if (response == 'success') {
+                            Swal.fire(
+                                'Terhapus!',
+                                'Data berhasil dihapus.',
+                                'success'
+                            );
+                            getDataReport();
+                            getKekayaan();
+                            $('#modal-lihat-transaksi').modal('hide');
+                        } else {
+                            Swal.fire(
+                                'Gagal!',
+                                'Data gagal dihapus.',
+                                'error'
+                            );
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    // function to update transaction
+    $('#update-transaction').click(function() {
+        var id = $('#id-transaction').val();
+        var statuse = $('#statuse-transaction').val();
+        var nominal = $('#nominal-transaction').val();
+        var detail = $('#detail-transaction').val();
+        var time = $('#time-transaction').val();
+        if (!nominal) {
+            $('#error-nominal-transaction').show();
+            return;
+        } else {
+            $('#error-nominal-transaction').hide();
+        }
+
+        if (nominal <= 0) {
+            $('#error-nominal-transaction2').show();
+            return;
+        } else {
+            $('#error-nominal-transaction2').hide();
+        }
+
+        if (!detail) {
+            $('#error-detail-transaction').show();
+            return;
+        } else {
+            $('#error-detail-transaction').hide();
+        }
+
+        if (!detail.trim()) {
+            $('#error-detail-transaction').show();
+            return;
+        } else {
+            $('#error-detail-transaction').hide();
+        }
+
+        if (!time) {
+            $('#error-time-transaction').show();
+            return;
+        } else {
+            $('#error-time-transaction').hide();
+        }
+
+        $.ajax({
+            url: '1_data/update_transaction.php',
+            type: 'POST',
+            data: {
+                id: id,
+                statuse: statuse,
+                nominal: nominal,
+                detail: detail,
+                time: time
+            },
+            success: function(response) {
+                if (response == 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: 'Data berhasil diupdate',
+                    });
+                    getDataReport();
+                    getKekayaan();
+                    $('#modal-lihat-transaksi').modal('hide');
+                }
             }
         });
     });
