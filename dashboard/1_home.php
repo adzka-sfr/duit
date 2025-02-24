@@ -6,8 +6,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 text-center mb-3">
-                <h3 id='kekayaan'><sup>Rp</sup> 0 </h3>
+            <div class="col-12 text-center mb-0">
+                <h3 id='kekayaan' class="mb-0"><sup>Rp</sup> 0 </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mt-0 mb-3 text-center">
+                <button id="lihat-saldo" class="btn btn-sm btn-primary" style="font-size: 0.5em;">Lihat saldo</button>
             </div>
         </div>
         <div class="row">
@@ -265,6 +270,26 @@
 </div>
 
 <div id="data-report" style="text-align: center;">
+</div>
+
+<!-- modal lihat saldo -->
+<div class="modal fade" id="modal-lihat-saldo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="exampleModalLabel">Saldo anda</h5>
+
+            </div>
+            <div class="modal-body" id="data-value-saldo">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <hr style="margin-bottom: 50px;">
@@ -863,4 +888,16 @@
         var lastMonth = year + '-' + month;
         $('#select-last-month').val(lastMonth);
     }
+
+    // function to open modal lihat saldo
+    $('#lihat-saldo').click(function() {
+        $('#modal-lihat-saldo').modal('show');
+        $.ajax({
+            url: '1_data/get_saldo_resume.php',
+            type: 'POST',
+            success: function(response) {
+                $('#data-value-saldo').html(response);
+            }
+        });
+    });
 </script>
