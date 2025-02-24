@@ -36,6 +36,30 @@
                 <button class="btn btn-sm btn-primary" style="font-size: 0.7em;" id="save-email">Update</button>
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="colorInput">Password baru</label>
+                    <input type="password" class="form-control" id="new-password" name="new-password">
+                    <span id="error-new-password-empty" style="color: #DC3545; display: none; font-size:0.7em"><i class="fa-solid fa-circle-info"></i> Masukkan password baru jika mau update</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mb-2">
+                <div class="form-group">
+                    <label for="colorInput">Password lama</label>
+                    <input type="password" class="form-control" id="old-password" name="old-password">
+                    <span id="error-old-password-empty" style="color: #DC3545; display: none; font-size:0.7em"><i class="fa-solid fa-circle-info"></i> Masukkan password lama untuk update</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12" style="text-align: right;">
+                <button class="btn btn-sm btn-primary" style="font-size: 0.7em;" id="save-password">Update</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -53,13 +77,22 @@
                 color: color
             },
             success: function(data) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil',
-                    text: 'Tema berhasil diperbarui',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                if (data == "success") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: 'Tema berhasil diperbarui',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: 'Tema gagal diperbarui',
+                        showConfirmButton: true
+                    });
+                }
             }
         });
     });
@@ -96,13 +129,76 @@
                     email: email
                 },
                 success: function(data) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil',
-                        text: 'Email berhasil diperbarui',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+                    if (data == "email-exist") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal',
+                            text: 'Email sudah terdaftar',
+                            showConfirmButton: true
+                        });
+                    } else if (data == "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: 'Email berhasil diperbarui',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal',
+                            text: 'Email gagal diperbarui',
+                            showConfirmButton: true
+                        });
+                    }
+                }
+            });
+        }
+    });
+
+    // function to save password
+    $('#save-password').click(function() {
+        var newPassword = $('#new-password').val();
+        var oldPassword = $('#old-password').val();
+        if ($.trim(newPassword) == "") {
+            $('#error-new-password-empty').show();
+        } else if ($.trim(oldPassword) == "") {
+            $('#error-old-password-empty').show();
+        } else {
+            $.ajax({
+                url: '4_data/act_set_password.php',
+                type: 'POST',
+                data: {
+                    newPassword: newPassword,
+                    oldPassword: oldPassword
+                },
+                success: function(data) {
+                    if (data == "password-error") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Password lama salah',
+                            text: 'Harap masukkan password lama yang benar',
+                            showConfirmButton: true
+                        });
+                    } else if (data == 'success') {
+                        $('#new-password').val('');
+                        $('#old-password').val('');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: 'Password berhasil diperbarui',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal',
+                            text: 'Tema gagal diperbarui',
+                            showConfirmButton: true
+                        });
+                    }
                 }
             });
         }
