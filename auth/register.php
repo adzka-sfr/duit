@@ -1,6 +1,6 @@
 <div class="card mt-5">
     <div class="card-header text-center">
-        <h4>Register to Duit <sub style="font-size: 0.3em;">by Adzka</sub></h4>
+        <h4>Daftar ke Duit <sub style="font-size: 0.3em;">by Adzka</sub></h4>
     </div>
     <div class="card-body">
         <div class="form-group">
@@ -16,11 +16,11 @@
         </div>
         <div class="row">
             <div class="col-12 text-center mt-3">
-                <button class="btn btn-primary btn-block" id="register">Register</button>
+                <button class="btn btn-primary btn-block" id="register">Daftar</button>
             </div>
         </div>
         <div class="form-group text-center mt-3">
-            <a href="main.php?page=login">Already account ? Login here</a>
+            <a href="main.php?page=login">Sudah punya akun ? Masuk disini</a>
         </div>
     </div>
 </div>
