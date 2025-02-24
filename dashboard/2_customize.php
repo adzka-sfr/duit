@@ -52,7 +52,7 @@
                         <div class="form-group input-group-sm">
                             <label for="exampleInputEmail1">Nama</label>
                             <input class="form-control" type="text" name="cat-name" id="cat-name">
-                            <span id="error-cat-name" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Nama tidak boleh kosong</span>
+                            <span id="error-cat-name" style="color: #DC3545; display: none; font-size:0.7em"><i class="fa-solid fa-circle-info"></i> Nama tidak boleh kosong</span>
                         </div>
                         <div class="form-check mt-2">
                             <input class="form-check-input" type="checkbox" id="retain-capital" name="retain-capital">
@@ -78,7 +78,7 @@
                                     Pemasukan
                                 </label>
                             </div>
-                            <span id="error-type" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan pilih salah satu</span>
+                            <span id="error-type" style="color: #DC3545; display: none; font-size:0.7em"><i class="fa-solid fa-circle-info"></i> Silahkan pilih salah satu</span>
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                             <label for="exampleInputEmail1">Icon</label>
                             <select class="search-biasa" style="width: 100%;" name="cat-icon" id="cat-icon">
                             </select>
-                            <span id="error-cat-icon" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan pilih icon</span>
+                            <span id="error-cat-icon" style="color: #DC3545; display: none; font-size:0.7em"><i class="fa-solid fa-circle-info"></i> Silahkan pilih icon</span>
                         </div>
                     </div>
                 </div>
@@ -261,11 +261,20 @@
     $(document).ready(function() {
         $(" #add-category").click(function() {
             $('#modal-tambah-kategori').modal('show');
+            $('#cat-name').val('');
+            $('#retain-capital').prop('checked', false);
+            $("input[name='cat-type']").prop('checked', false);
+            $('#error-cat-name').hide();
+            $('#error-type').hide();
+            $('#error-cat-icon').hide();
             getIconList();
         });
 
         $("#add-method").click(function() {
             $('#modal-tambah-metode').modal('show');
+            $('#method-name').val('');
+            $('#retain-capital-method').prop('checked', false);
+            $('#error-method-name').hide();
         });
 
         getCategory();

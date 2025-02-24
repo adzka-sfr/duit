@@ -77,7 +77,7 @@
                             <label for="basic-url" class="form-label">Nominal</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon3">Rp</span>
-                                <input type="number" style="text-align: right;" disabled class="form-control" oninput="validateInputJustNumber(event)" id="nominal-budget-edit" aria-describedby="basic-addon3 basic-addon4">
+                                <input type="number" disabled class="form-control" oninput="validateInputJustNumber(event)" id="nominal-budget-edit" aria-describedby="basic-addon3 basic-addon4">
                                 <span id="error-nominal-budget-edit" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Nominal harus diisi</span>
                             </div>
                         </div>
@@ -135,6 +135,8 @@
         };
         var formattedMonth = new Date(month + '-01').toLocaleDateString('en-US', options);
         $('#month-label').html(formattedMonth);
+        $('#nominal-budget').val('');
+        $('#nominal-budget').prop('disabled', true);
         $('#modal-tambah-anggaran').modal('show');
         $('#modal-tambah-anggaran').on('shown.bs.modal', function() {
             getCategory();
