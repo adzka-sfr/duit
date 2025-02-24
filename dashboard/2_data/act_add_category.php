@@ -13,6 +13,7 @@ if ($jwt === null) {
     $catName = $_POST['catName'];
     $catType = $_POST['catType'];
     $retainCapital = $_POST['retainCapital'];
+    $icon = $_POST['icon'];
 
     // change all characters to lowercase
     if ($retainCapital == "true") {
@@ -32,12 +33,13 @@ if ($jwt === null) {
     if ($check->rowCount() > 0) {
         echo "exist";
     } else {
-        $stmt = $connect->prepare("INSERT INTO t_category (c_name, c_type, c_username, c_datetime, c_status) VALUES (:catName, :catType, :username, :cDatetime, :cStatus)");
+        $stmt = $connect->prepare("INSERT INTO t_category (c_name, c_type, c_username, c_datetime, c_status, c_icon) VALUES (:catName, :catType, :username, :cDatetime, :cStatus, :cIcon)");
         $stmt->bindParam(':catName', $catName);
         $stmt->bindParam(':catType', $catType);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':cDatetime', $now);
         $stmt->bindParam(':cStatus', $statuse);
+        $stmt->bindParam(':cIcon', $icon);
         if ($stmt->execute()) {
             echo "success";
         } else {

@@ -85,10 +85,10 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Kategori</label>
+                            <label for="exampleInputEmail1">Icon</label>
                             <select class="search-biasa" style="width: 100%;" name="cat-icon" id="cat-icon">
                             </select>
-                            <span id="error-cat-icon" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan pilih kategori</span>
+                            <span id="error-cat-icon" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan pilih icon</span>
                         </div>
                     </div>
                 </div>
@@ -277,15 +277,19 @@
         var catName = $("#cat-name").val();
         var catType = $("input[name='cat-type' ]:checked").val();
         var retainCapital = $("#retain-capital").is(":checked");
+        var icon = $("#cat-icon").val();
 
         // Reset error messages
         $("#error-cat-name").hide();
         $("#error-type").hide();
+        $('#error-cat-icon').hide();
 
-        if (catName == "") {
+        if ($.trim(catName) == "") {
             $("#error-cat-name").show();
         } else if (catType == undefined) {
             $("#error-type").show();
+        } else if (icon == "") {
+            $('#error-cat-icon').show();
         } else {
             $.ajax({
                 url: "2_data/act_add_category.php",
@@ -293,7 +297,8 @@
                 data: {
                     catName: catName,
                     catType: catType,
-                    retainCapital: retainCapital
+                    retainCapital: retainCapital,
+                    icon: icon
                 },
                 success: function(response) {
                     if (response == "success") {

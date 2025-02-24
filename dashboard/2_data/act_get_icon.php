@@ -10,7 +10,7 @@ if ($jwt === null) {
     // require_once $_SERVER['DOCUMENT_ROOT'] . '/config/check_cookie.php'; // hosting
 
     try {
-        $stmt = $connect->prepare("SELECT c_name, c_code FROM t_icon");
+        $stmt = $connect->prepare("SELECT c_name, c_code FROM t_icon ORDER BY c_name ASC");
         $stmt->execute();
         $icons = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

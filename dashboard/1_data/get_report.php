@@ -14,16 +14,18 @@ if ($jwt === null) {
 
     $query_dates = "SELECT DISTINCT DATE_FORMAT(c_date, '%Y-%m-%d') as c_date 
                     FROM v_transaction 
-                    WHERE c_username = :username AND DATE_FORMAT(c_date, '%Y-%m') = :month";
+                    WHERE c_username = :username AND DATE_FORMAT(c_date, '%Y-%m') = :monthe
+                    ORDER BY c_date DESC";
     $stmt_dates = $connect->prepare($query_dates);
     $stmt_dates->bindParam(':username', $username);
-    $stmt_dates->bindParam(':month', $month);
+    $stmt_dates->bindParam(':monthe', $month);
     $stmt_dates->execute();
     $distinct_dates = $stmt_dates->fetchAll(PDO::FETCH_ASSOC);
 
     $query = "SELECT id, c_date, c_detail, c_nominal, c_category_name, c_category_icon, c_status 
               FROM v_transaction 
-              WHERE c_username = :username AND DATE_FORMAT(c_date, '%Y-%m') = :monthe";
+              WHERE c_username = :username AND DATE_FORMAT(c_date, '%Y-%m') = :monthe
+              ORDER BY id DESC";
     $stmt = $connect->prepare($query);
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':monthe', $month);
@@ -82,7 +84,7 @@ if ($jwt === null) {
                     <?php foreach ($transactions as $transaction): ?>
                         <tr onclick="openDetailTransaction('<?= $transaction['id'] ?>', '<?= $transaction['c_status'] ?>')">
                             <th class="align-middle" style="font-size: 2em; padding-left: 0px; padding-right: 10px; width: 5%; text-align: center">
-                                <i class="fa-solid <?= $transaction['c_category_icon'] ?>"></i>
+                                <i class="<?= $transaction['c_category_icon'] ?>"></i>
                             </th>
                             <td class="align-top" style="padding-left: 10px; padding-right: 0px;">
                                 <div class="row">
