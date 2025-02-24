@@ -150,6 +150,22 @@ if ($user) {
                     });
                 }
             });
+
+            $('#username').keypress(function(e) {
+                if (e.which == 13) { // Enter key pressed
+                    $('#password').focus();
+                }
+            });
+
+            $('#password').keypress(function(e) {
+                if (e.which == 13) { // Enter key pressed
+                    if ($('#register').is(':visible')) {
+                        $('#register').click();
+                    } else if ($('#login').is(':visible')) {
+                        $('#login').click();
+                    }
+                }
+            });
         });
     </script>
 
