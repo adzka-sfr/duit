@@ -72,7 +72,7 @@ if ($jwt === null) {
             ]);
         } else {
             echo json_encode([
-                'kekayaan' => $total_balance,
+                'kekayaan' => 0,
                 'last_month_balance' => 0,
                 'this_month_balance' => 0,
                 'difference' => 0

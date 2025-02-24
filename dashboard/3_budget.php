@@ -26,7 +26,7 @@
                             <label for="exampleInputEmail1">Kategori</label>
                             <select class="search-biasa" style="width: 100%;" name="cat-budget" onchange="turnOnNominal()" id="cat-budget">
                             </select>
-                            <span id="error-cat-budget" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Silahkan pilih kategori</span>
+                            <span id="error-cat-budget" style="color: #DC3545; display: none; font-size:0.7em"><i class="fa-solid fa-circle-info"></i> Silahkan pilih kategori</span>
                         </div>
                     </div>
                 </div>
@@ -37,8 +37,8 @@
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon3">Rp</span>
                                 <input type="number" style="text-align: right;" disabled class="form-control" oninput="validateInputJustNumber(event)" id="nominal-budget" aria-describedby="basic-addon3 basic-addon4">
-                                <span id="error-nominal-budget" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Nominal harus diisi</span>
                             </div>
+                            <span id="error-nominal-budget" style="color: #DC3545; display: none; font-size:0.7em"><i class="fa-solid fa-circle-info"></i> Nominal harus diisi</span>
                         </div>
                     </div>
                 </div>
@@ -78,8 +78,8 @@
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon3">Rp</span>
                                 <input type="number" disabled class="form-control" oninput="validateInputJustNumber(event)" id="nominal-budget-edit" aria-describedby="basic-addon3 basic-addon4">
-                                <span id="error-nominal-budget-edit" style="color: #DC3545; display: none;"><i class="fa-solid fa-circle-info"></i> Nominal harus diisi</span>
                             </div>
+                            <span id="error-nominal-budget-edit" style="color: #DC3545; display: none; font-size:0.7em"><i class="fa-solid fa-circle-info"></i> Nominal harus diisi</span>
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/connect.php'; // local
 // get data post
 $username = $_POST['username'];
 $password = $_POST['password'];
-$email = $_POST['email'];
+$register_time = date('Y-m-d H:i:s', strtotime($now));
 
 // check if username already exists
 $sql = "SELECT * FROM t_auth WHERE c_username = :username";
@@ -30,11 +30,12 @@ if ($result) {
     } else {
         // insert new user
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO t_auth (c_username, c_password, c_email) VALUES (:username, :password, :email)";
+        $sql = "INSERT INTO t_auth (c_username, c_password, c_email, c_datetime) VALUES (:username, :passworde, :email, :register_time)";
         $stmt = $connect->prepare($sql);
         $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':password', $hashed_password);
+        $stmt->bindParam(':passworde', $hashed_password);
         $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':register_time', $register_time);
         if ($stmt->execute()) {
             echo json_encode(array('status' => 'success'));
         } else {

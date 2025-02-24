@@ -9,12 +9,16 @@
             <small class="text-danger" id="username-error" style="display: none;">Username wajib diisi</small>
             <small class="text-danger" id="username-not-exist" style="display: none;">Username tidak terdaftar</small>
         </div>
-        <div class="form-group">
+        <div class="form-group mt-3">
             <label for="password">Password</label>
             <input type="password" name="password" id="password" class="form-control" required>
             <small class="text-danger" id="password-error" style="display: none;">Password salah</small>
         </div>
-        <button class="btn btn-primary btn-block" id="login">Login</button>
+        <div class="row">
+            <div class="col-12 mt-3 text-center">
+                <button class="btn btn-primary btn-block" id="login">Login</button>
+            </div>
+        </div>
         <div class="form-group text-center mt-3">
             <a href="main.php?page=register">New user? Register here</a>
         </div>
