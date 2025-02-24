@@ -11,16 +11,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6 text-center" style="color:darkgrey; font-size: 1em;">
+            <div class="col-6 text-center" style="color:darkgrey; font-size: 1em;" id="last-month-nav">
                 Bulan lalu
             </div>
-            <div class="col-6 text-center font-weight-bold">
+            <div class="col-6 text-center font-weight-bold" id="this-month-nav" style="color:black; font-size: 1em;">
                 Bulan ini
             </div>
         </div>
         <hr>
         <div class="row">
             <div class="col-12">
+                <input type="month" name="select-last-month" onchange="getKekayaanLastMonth(),getDataReportByMonth()" id="select-last-month" class="form-control mb-3" style="width: 50%; display: none;">
                 <table style="width: 100%; border-collapse: collapse;">
                     <tr style="margin: 0; padding: 0;">
                         <td style="margin: 0; padding: 0;">Saldo awal</td>
@@ -263,8 +264,7 @@
     </div>
 </div>
 
-<div id="data-report">
-
+<div id="data-report" style="text-align: center;">
 </div>
 
 <hr style="margin-bottom: 50px;">
@@ -343,11 +343,51 @@
         });
     }
 
+    // functioni to get kekayaan by month
+    function getKekayaanLastMonth() {
+        var month = $('#select-last-month').val();
+        $.ajax({
+            url: '1_data/get_kekayaan_last_month.php',
+            type: 'POST',
+            data: {
+                month: month
+            },
+            success: function(response) {
+                var response = JSON.parse(response);
+                $('#last-month-balance').html('<sup>Rp</sup> ' + parseInt(response.last_month_balance).toLocaleString('en-US'));
+                $('#this-month-balance').html('<sup>Rp</sup> ' + parseInt(response.this_month_balance).toLocaleString('en-US'));
+                var difference = parseInt(response.this_month_balance) - parseInt(response.last_month_balance);
+                if (difference > 0) {
+                    $('#difference-balance').html('<sup>Rp</sup> ' + difference.toLocaleString('en-US')).addClass('text-success').removeClass('text-danger');
+                } else if (difference < 0) {
+                    $('#difference-balance').html('<sup>Rp</sup> ' + difference.toLocaleString('en-US')).addClass('text-danger').removeClass('text-success');
+                } else {
+                    $('#difference-balance').html('<sup>Rp</sup> ' + difference.toLocaleString('en-US')).removeClass('text-success text-danger');
+                }
+            }
+        });
+    }
+
     // function to get data report
     function getDataReport() {
         $.ajax({
             url: '1_data/get_report.php',
             type: 'POST',
+            success: function(response) {
+                $('#data-report').html(response);
+            }
+        });
+    }
+
+    // function to get data report by month
+    function getDataReportByMonth() {
+        var month = $('#select-last-month').val();
+        $.ajax({
+            url: '1_data/get_report_last_month.php',
+            type: 'POST',
+            data: {
+                month: month
+            },
             success: function(response) {
                 $('#data-report').html(response);
             }
@@ -778,5 +818,49 @@
     function openDetailTransaction(id, status) {
         console.log(id, status);
 
+    }
+
+    // function to move bulan lalu
+    $('#last-month-nav').click(function() {
+        if (!$(this).hasClass('font-weight-bold')) {
+            $(this).addClass('font-weight-bold').css({
+                'color': 'black',
+                'font-size': '1em'
+            }).prop('disabled', true);
+            $('#this-month-nav').removeClass('font-weight-bold').css({
+                'color': 'darkgrey',
+                'font-size': '1em'
+            }).prop('disabled', false);
+            $('#select-last-month').show();
+            getLastMonth();
+            getKekayaanLastMonth();
+            getDataReportByMonth();
+        }
+    });
+
+    $('#this-month-nav').click(function() {
+        if (!$(this).hasClass('font-weight-bold')) {
+            $(this).addClass('font-weight-bold').css({
+                'color': 'black',
+                'font-size': '1em'
+            }).prop('disabled', true);
+            $('#last-month-nav').removeClass('font-weight-bold').css({
+                'color': 'darkgrey',
+                'font-size': '1em'
+            }).prop('disabled', false);
+            $('#select-last-month').hide();
+            getKekayaan();
+            getDataReport();
+        }
+    });
+
+    // function to get last month
+    function getLastMonth() {
+        var date = new Date();
+        date.setMonth(date.getMonth() - 1);
+        var year = date.getFullYear();
+        var month = String(date.getMonth() + 1).padStart(2, '0');
+        var lastMonth = year + '-' + month;
+        $('#select-last-month').val(lastMonth);
     }
 </script>

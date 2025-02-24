@@ -10,7 +10,9 @@ if ($jwt === null) {
     // require_once $_SERVER['DOCUMENT_ROOT'] . '/config/check_cookie.php'; // hosting
 
     $username = $user['username'];
-    $month = date('Y-m', strtotime($now));
+    // get data post
+    $month = $_POST['month'];
+    $month = date('Y-m', strtotime($month));
 
     $query_dates = "SELECT DISTINCT DATE_FORMAT(c_date, '%Y-%m-%d') as c_date 
                     FROM v_transaction 
