@@ -52,6 +52,11 @@
     </div>
 </div>
 
+<div style="text-align: center;">
+    <button id="input-page" class="btn btn-sm btn-secondary" style="font-size: 0.6em; width: 30%;">Input</button>
+    <button id="laporan-page" class="btn btn-sm btn-primary" style="font-size: 0.6em; width: 30%;">Laporan</button>
+</div>
+
 <div id="data-input" style="display: none;">
     <div class="card mt-2" style="padding-left: 0px; padding-right: 0px;">
         <div class="card-header">
@@ -556,7 +561,7 @@
         });
     }
 
-    
+
 
     // function to get saldo topup
     function getSaldoTopup(id, type) {
@@ -824,9 +829,9 @@
         var saldoFrom = parseInt($('#saldo-from').val().replace(/,/g, ''));
         if (saldoFrom - nominal < 0) {
             Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            html: 'Saldo tidak mencukupi!',
+                icon: 'error',
+                title: 'Oops...',
+                html: 'Saldo tidak mencukupi!',
             });
             return;
         }
@@ -1066,6 +1071,4 @@
             }
         });
     });
-
-    
 </script>
