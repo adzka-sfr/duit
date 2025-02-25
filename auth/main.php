@@ -103,7 +103,13 @@ if ($user) {
                             } else if (response.status == 'email_exist') {
                                 $('#email-exist').show();
                             } else {
-                                alert('Failed to register. Please try again.');
+                                Swal.fire({
+                                    title: 'Registration gagal!',
+                                    text: 'Silahkan coba lagi.',
+                                    icon: 'error',
+                                    showConfirmButton: true,
+                                    confirmButtonText: 'Ok'
+                                });
                             }
                         }
                     });
@@ -189,7 +195,8 @@ if ($user) {
                             email
                         },
                         success: function(response) {
-                            if (response == 'success') {
+                            var response = JSON.parse(response);
+                            if (response.status == 'success') {
                                 Swal.fire({
                                     title: 'Reset akun berhasil!',
                                     text: 'Silahkan cek email untuk melanjutkan',
@@ -199,10 +206,24 @@ if ($user) {
                                 }).then(function() {
                                     window.location = '<?php echo base_url('auth/'); ?>';
                                 });
-                            } else if (response == 'email-not-exist') {
+                            } else if (response.status == 'email-not-exist') {
                                 $('#email-not-exist').show();
+                            }else if(response.status == 'to-much'){
+                                Swal.fire({
+                                    title: 'Reset akun gagal!',
+                                    text: 'Silahkan coba lagi pada ' + response.next_time,
+                                    icon: 'error',
+                                    showConfirmButton: true,
+                                    confirmButtonText: 'Ok'
+                                });
                             } else {
-                                alert('Failed to reset account. Please try again.');
+                                Swal.fire({
+                                    title: 'Reset akun gagal!',
+                                    text: 'Silahkan coba lagi.',
+                                    icon: 'error',
+                                    showConfirmButton: true,
+                                    confirmButtonText: 'Ok'
+                                });
                             }
                         }
                     });
