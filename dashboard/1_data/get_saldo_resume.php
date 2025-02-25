@@ -17,6 +17,10 @@ if ($jwt === null) {
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    $totalSum = 0;
+    foreach ($result as $row) {
+        $totalSum += $row['c_total'];
+    }
 ?>
     <div class="row">
         <?php foreach ($result as $row): ?>
@@ -26,6 +30,12 @@ if ($jwt === null) {
                     <div class="input-group">
                         <span class="input-group-text" id="basic-addon3">Rp</span>
                         <input type="text" disabled class="form-control" style="text-align: right;" value="<?php echo number_format($row['c_total'], 0, '.', ','); ?>" aria-describedby="basic-addon3 basic-addon4">
+                        <?php
+                        $percentage = ($row['c_total'] / $totalSum) * 100;
+                        ?>
+                        <span class="input-group-text" id="basic-addon3" style="width: 25%; display: flex; justify-content: flex-end;">
+                            <?php echo number_format($percentage, 2); ?>%
+                        </span>
                     </div>
                 </div>
             </div>
