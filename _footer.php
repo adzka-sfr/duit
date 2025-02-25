@@ -6,8 +6,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <!-- DataTables JS -->
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<!-- ECharts JS -->
-<script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/dist/echarts.min.js"></script>
 
 <script>
     $(document).ready(function() {

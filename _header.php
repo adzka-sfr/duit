@@ -29,6 +29,8 @@ $themeColor = isset($user['theme']) ? $user['theme'] : '#007bff'; // Default to 
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;700&display=swap" rel="stylesheet">
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- ECharts JS -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
     <style>
         body {
             /* font-family: 'Google Sans', sans-serif; */

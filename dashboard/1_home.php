@@ -53,8 +53,23 @@
 </div>
 
 <div style="text-align: center;">
-    <button id="input-page" class="btn btn-sm btn-secondary" style="font-size: 0.6em; width: 30%;">Input</button>
+    <button id="input-page" disabled class="btn btn-sm btn-secondary" style="font-size: 0.6em; width: 30%;">Input</button>
     <button id="laporan-page" class="btn btn-sm btn-primary" style="font-size: 0.6em; width: 30%;">Laporan</button>
+</div>
+
+<div class="card mb-4 mt-2" style="padding-left: 0px; padding-right: 0px;">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <div id="bunder" style="height:500px; width: 100%; margin-top: 20px;"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div id="batang" style="height:500px; width: 100%; margin-top: 20px;"></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div id="data-input" style="display: none;">
@@ -560,8 +575,6 @@
             }
         });
     }
-
-
 
     // function to get saldo topup
     function getSaldoTopup(id, type) {
@@ -1071,4 +1084,156 @@
             }
         });
     });
+
+    // function to change input or laporan
+    $('#input-page').click(function() {
+        $('#input-page').removeClass('btn-primary').addClass('btn-secondary');
+        $('#laporan-page').removeClass('btn-secondary').addClass('btn-primary');
+        $('#input-page').prop('disabled', true);
+        $('#laporan-page').prop('disabled', false);
+    });
+
+    $('#laporan-page').click(function() {
+        $('#input-page').removeClass('btn-secondary').addClass('btn-primary');
+        $('#laporan-page').removeClass('btn-primary').addClass('btn-secondary');
+        $('#laporan-page').prop('disabled', true);
+        $('#input-page').prop('disabled', false);
+    });
+</script>
+
+<script type="text/javascript">
+    var chartDom = document.getElementById('batang');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        legend: {},
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'value',
+            boundaryGap: [0, 0.01],
+            axisLabel: {
+                show: false
+            }
+        },
+        yAxis: {
+            type: 'category',
+            data: ['Internet', 'Makan', 'Air', 'Listrik', 'BBM', 'Tempat tinggal']
+        },
+        series: [{
+                name: 'Anggaran',
+                type: 'bar',
+                data: [18203, 23489, 29034, 104970, 131744, 630230],
+                itemStyle: {
+                    color: '#EE6666'
+                },
+                label: {
+                    show: true,
+                    position: 'insideLeft',
+                    align: 'left',
+                    formatter: function(params) {
+                        return params.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                    }
+                }
+            },
+            {
+                name: 'Aktual',
+                type: 'bar',
+                data: [19325, 23438, 31000, 121594, 134141, 681807],
+                itemStyle: {
+                    color: '#91CC75'
+                },
+                label: {
+                    show: true,
+                    position: 'insideLeft',
+                    align: 'left',
+                    formatter: function(params) {
+                        return params.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                    }
+                }
+            }
+        ]
+    };
+
+    option && myChart.setOption(option);
+
+    // untuk handle ketika chart di klik
+    // myChart.on('click', function(params) {
+    //     // var dataIndex = params.dataIndex; // index / urutan
+    //     var legend = params.seriesName; // by tipe data / legend
+    //     var label = params.name; // label / nama yang ada di sumbu x (bawah)
+    //     // var deptCode = efficiencyData.deptCode[dataIndex]; // mengambil full date dengan bantuan index
+
+    //     if (legend != 'Total Piano' && legend != 'Rata-Rata NG') {
+    //         gettrend(legend, label);
+    //     }
+    // });
+</script>
+
+<script>
+    var chartDom = document.getElementById('bunder');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+        title: {
+            text: 'Pengeluaran',
+            subtext: 'Fake Data',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b}: {c} ({d}%)' // Shows percentage in tooltip
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left'
+        },
+        series: [{
+            name: 'Access From',
+            type: 'pie',
+            radius: '50%',
+            data: [{
+                    value: 1048,
+                    name: 'Pengeluaran'
+                },
+                {
+                    value: 735,
+                    name: 'BBM'
+                },
+                {
+                    value: 580,
+                    name: 'Jajan'
+                },
+                {
+                    value: 484,
+                    name: 'Rokok'
+                },
+                {
+                    value: 300,
+                    name: 'Listrik'
+                }
+            ],
+            label: {
+                show: true,
+                formatter: '{d}%' // Label shows percentage
+            },
+            emphasis: {
+                disabled: true // Disables hover effect
+            }
+        }]
+    };
+
+    option && myChart.setOption(option);
 </script>
