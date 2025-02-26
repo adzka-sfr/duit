@@ -55,10 +55,10 @@ if ($user) {
             $('#register').click(function() {
                 var username = $('#username').val();
                 var password = $('#password').val();
-                var email = $('#email').val();
 
                 // Reset error messages
-                $('.error-message').hide();
+                $('#username-error').hide();
+                $('#password-error').hide();
 
                 // Validate inputs
                 var isValid = true;
@@ -70,21 +70,24 @@ if ($user) {
                     $('#password-error').show();
                     isValid = false;
                 }
-                if (email === '') {
-                    $('#email-error').show();
-                    isValid = false;
-                }
 
                 if (isValid) {
+                    $('#username').prop('disabled', true);
+                    $('#password').prop('disabled', true);
+                    $('#register').prop('disabled', true);
+                    $('#register').html('Loading...');
                     $.ajax({
                         url: '<?php echo base_url('auth/act_register.php'); ?>',
                         type: 'POST',
                         data: {
                             username,
-                            password,
-                            email
+                            password
                         },
                         success: function(response) {
+                            $('#username').prop('disabled', false);
+                            $('#password').prop('disabled', false);
+                            $('#register').prop('disabled', false);
+                            $('#register').html('Register');
                             var response = JSON.parse(response);
                             console.log(response.status);
 
@@ -121,7 +124,9 @@ if ($user) {
                 var password = $('#password').val();
 
                 // Reset error messages
-                $('.error-message').hide();
+                $('#username-error').hide();
+                $('#username-not-exist').hide();
+                $('#password-error').hide();
 
                 // Validate inputs
                 var isValid = true;
@@ -135,6 +140,10 @@ if ($user) {
                 }
 
                 if (isValid) {
+                    $('#username').prop('disabled', true);
+                    $('#password').prop('disabled', true);
+                    $('#login').prop('disabled', true);
+                    $('#login').html('Loading...');
                     $.ajax({
                         url: '<?php echo base_url('auth/act_login.php'); ?>',
                         type: 'POST',
@@ -143,12 +152,18 @@ if ($user) {
                             password
                         },
                         success: function(response) {
+                            $('#username').prop('disabled', false);
+                            $('#password').prop('disabled', false);
+                            $('#login').prop('disabled', false);
+                            $('#login').html('Login');
                             if (response == 'success') {
                                 window.location = '<?php echo base_url('dashboard'); ?>';
                             } else if (response == 'username-not-exist') {
                                 $('#username-not-exist').show();
+                                $('#username').focus();
                             } else if (response == 'password-error') {
                                 $('#password-error').show();
+                                $('#password').focus();
                             } else {
                                 alert('Failed to login. Please try again.');
                             }
@@ -173,6 +188,12 @@ if ($user) {
                 }
             });
 
+            $('#email').keypress(function(e) {
+                if (e.which == 13) { // Enter key pressed
+                    $('#reset-akun').click();
+                }
+            });
+
             $('#reset-akun').click(function() {
                 var email = $('#email').val();
 
@@ -188,6 +209,9 @@ if ($user) {
                 }
 
                 if (isValid) {
+                    $('#email').prop('disabled', true);
+                    $('#reset-akun').prop('disabled', true);
+                    $('#reset-akun').html('Loading...');
                     $.ajax({
                         url: '<?php echo base_url('auth/act_reset.php'); ?>',
                         type: 'POST',
@@ -195,6 +219,9 @@ if ($user) {
                             email
                         },
                         success: function(response) {
+                            $('#email').prop('disabled', false);
+                            $('#reset-akun').prop('disabled', false);
+                            $('#reset-akun').html('Reset Akun');
                             var response = JSON.parse(response);
                             if (response.status == 'success') {
                                 Swal.fire({
@@ -208,7 +235,7 @@ if ($user) {
                                 });
                             } else if (response.status == 'email-not-exist') {
                                 $('#email-not-exist').show();
-                            }else if(response.status == 'to-much'){
+                            } else if (response.status == 'to-much') {
                                 Swal.fire({
                                     title: 'Reset akun gagal!',
                                     text: 'Silahkan coba lagi pada ' + response.next_time,

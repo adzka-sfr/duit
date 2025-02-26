@@ -36,13 +36,14 @@
     // Logout
     $("#logout-link").click(function() {
         Swal.fire({
-            title: 'Logout',
-            text: 'Are you sure you want to logout?',
+            title: 'Keluar',
+            text: 'Apakah anda yakin akan keluar?',
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, logout'
+            confirmButtonText: 'Yoi, keluar',
+            cancelButtonText: 'Ngga deh'
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href = "../auth/act_logout.php";
