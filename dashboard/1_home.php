@@ -17,10 +17,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6 text-center" style="color:darkgrey; font-size: 1em;" id="last-month-nav">
+            <div class="col-6 text-center" style="color:darkgrey; font-size: 1em; cursor:pointer;" id="last-month-nav">
                 Bulan lalu
             </div>
-            <div class="col-6 text-center font-weight-bold" id="this-month-nav" style="color:black; font-size: 1em;">
+            <div class="col-6 text-center font-weight-bold" id="this-month-nav" style="color:black; font-size: 1em; cursor:pointer;">
                 Bulan ini
             </div>
         </div>
@@ -1027,7 +1027,7 @@
         if (!$(this).hasClass('font-weight-bold')) {
             $(this).addClass('font-weight-bold').css({
                 'color': 'black',
-                'font-size': '1em'
+                'font-size': '1em'               
             }).prop('disabled', true);
             $('#last-month-nav').removeClass('font-weight-bold').css({
                 'color': 'darkgrey',

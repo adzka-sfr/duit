@@ -90,7 +90,7 @@ if ($jwt === null) {
                             </th>
                         </tr>
                         <?php foreach ($transactions as $transaction): ?>
-                            <tr onclick="openDetailTransaction('<?= $transaction['id'] ?>', '<?= $transaction['c_status'] ?>', '<?= $date ?>')">
+                            <tr onclick="openDetailTransaction('<?= $transaction['id'] ?>', '<?= $transaction['c_status'] ?>', '<?= $date ?>')" style="cursor:pointer;">
                                 <th class="align-middle" style="font-size: 2em; padding-left: 0px; padding-right: 10px; width: 5%; text-align: center">
                                     <i class="<?= $transaction['c_category_icon'] ?>"></i>
                                 </th>
