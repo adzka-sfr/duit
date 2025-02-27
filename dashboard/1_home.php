@@ -57,8 +57,9 @@
 </div>
 
 <div style="text-align: center;">
-    <button id="input-page" disabled class="btn btn-sm btn-secondary" style="font-size: 0.6em; width: 30%;">Input</button>
-    <button id="laporan-page" class="btn btn-sm btn-primary" style="font-size: 0.6em; width: 30%;">Laporan</button>
+    <button id="input-page" disabled class="btn btn-sm btn-secondary" style="font-size: 0.6em; width: 20%;">Input</button>
+    <button id="laporan-page" class="btn btn-sm btn-primary" style="font-size: 0.6em; width: 20%;">Laporan</button>
+    <button id="cari-data-page" class="btn btn-sm btn-primary" style="font-size: 0.6em; width: 20%;">Cari data</button>
 </div>
 
 <div id="data-laporan" class="card mb-4 mt-2" style="padding-left: 0px; padding-right: 0px; display: none;">
@@ -302,6 +303,29 @@
 </div>
 <div id="data-report-loading" style="text-align: center; margin-top: 50px;">
     <i class="fa-solid fa-circle-notch fa-spin"></i>
+</div>
+
+<div id="data-cari" style="display: none;">
+    <div class="card mt-2" style="padding-left: 0px; padding-right: 0px;">
+        <div class="card-body pt-0">
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Kata kunci detail</label>
+                        <input type="text" name="kata-kunci" id="kata-kunci" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mt-3" id="data-cari-table" style="display: none;">
+
+                </div>
+                <div class="col-12" id="data-cari-table-loading" style="text-align: center; margin-top: 50px; display:none;">
+                    <i class="fa-solid fa-circle-notch fa-spin"></i>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- modal lihat saldo -->
@@ -1224,26 +1248,52 @@
     $('#input-page').click(function() {
         $('#input-page').removeClass('btn-primary').addClass('btn-secondary');
         $('#laporan-page').removeClass('btn-secondary').addClass('btn-primary');
+        $('#cari-data-page').removeClass('btn-secondary').addClass('btn-primary');
+
         $('#input-page').prop('disabled', true);
         $('#laporan-page').prop('disabled', false);
+        $('#cari-data-page').prop('disabled', false);
+
         $('#data-laporan').hide();
         $('#data-input').hide();
         $('#data-report').show();
         $('#add-data').show();
+        $('#data-cari').hide();
 
     });
 
     $('#laporan-page').click(function() {
         $('#input-page').removeClass('btn-secondary').addClass('btn-primary');
         $('#laporan-page').removeClass('btn-primary').addClass('btn-secondary');
+        $('#cari-data-page').removeClass('btn-secondary').addClass('btn-primary');
+
         $('#laporan-page').prop('disabled', true);
         $('#input-page').prop('disabled', false);
+        $('#cari-data-page').prop('disabled', false);
+
         $('#data-laporan').show();
         $('#data-input').hide();
         $('#data-report').hide();
         $('#add-data').hide();
+        $('#data-cari').hide();
 
         $('#laporan-balance').trigger('click');
+    });
+
+    $('#cari-data-page').click(function() {
+        $('#input-page').removeClass('btn-secondary').addClass('btn-primary');
+        $('#laporan-page').removeClass('btn-secondary').addClass('btn-primary');
+        $('#cari-data-page').removeClass('btn-primary').addClass('btn-secondary');
+
+        $('#laporan-page').prop('disabled', false);
+        $('#input-page').prop('disabled', false);
+        $('#cari-data-page').prop('disabled', true);
+
+        $('#data-laporan').hide();
+        $('#data-input').hide();
+        $('#data-report').hide();
+        $('#add-data').hide();
+        $('#data-cari').show();
     });
 
     $('#laporan-balance').click(function() {
@@ -1335,4 +1385,27 @@
             }
         });
     }
+
+    // function to get data cari
+    $('#kata-kunci').keyup(function() {
+        var kata_kunci = $(this).val();
+        if (kata_kunci.length > 0) {
+            $('#data-cari-loading').show();
+            $('#data-cari-table').hide();
+            $.ajax({
+                url: '1_data/get_cari.php',
+                type: 'POST',
+                data: {
+                    kata_kunci: kata_kunci
+                },
+                success: function(response) {
+                    $('#data-cari-loading').hide();
+                    $('#data-cari-table').show();
+                    $('#data-cari-table').html(response);
+                }
+            });
+        } else {
+            $('#data-cari-table').hide();
+        }
+    });
 </script>
