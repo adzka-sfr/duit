@@ -100,11 +100,12 @@
                 </div>
                 <div class="row">
                     <div class="col-12 mt-3 text-center">
-                        <i id="selected-icon" class="fas fa-icons" style="font-size: 1.5em;"></i>
+                        <i id="selected-icon" class="fa-solid fa-icons" style="font-size: 1.5em;"></i>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
                 <button type="button" id="save-category" class="btn btn-primary btn-sm">
                     Save
                 </button>
@@ -139,6 +140,7 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
                 <button type="button" id="save-method" class="btn btn-primary btn-sm">
                     Save
                 </button>
@@ -193,7 +195,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Icon</label>
+                            <label for="exampleInputEmail1">Pilih untuk mengganti icon</label>
                             <select class="search-biasa" style="width: 100%;" name="cat-icon-edit" id="cat-icon-edit">
                             </select>
                             <span id="error-cat-icon-edit" style="color: #DC3545; display: none; font-size:0.7em"><i class="fa-solid fa-circle-info"></i> Silahkan pilih icon</span>
@@ -202,7 +204,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 mt-3 text-center">
-                        <i id="selected-icon-edit" class="fas fa-icons" style="font-size: 1.5em;"></i>
+                        <i id="selected-icon-edit" class="fa-solid fa-icons" style="font-size: 1.5em;"></i>
                     </div>
                 </div>
                 <div class="row">
@@ -220,6 +222,7 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
                 <button type="button" id="delete-category" class="btn btn-danger btn-sm">
                     Hapus
                 </button>
@@ -267,6 +270,7 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
                 <button type="button" id="delete-method" class="btn btn-danger btn-sm">
                     Hapus
                 </button>
@@ -484,7 +488,7 @@
     }
 
     // function to edit category
-    function editCategory(id, name, type, status) {
+    function editCategory(id, name, type, status, icon) {
         // set value
         $('#edit-cat-id').val(id);
         $('#edit-cat-name').val(name);
@@ -501,7 +505,9 @@
             $('#edit-status').prop('checked', false);
         }
 
-        getIconList();
+        $("#selected-icon-edit").attr('class', icon);
+
+        getIconListEdit();
 
         // open modal
         $('#modal-edit-kategori').modal('show');
@@ -853,12 +859,12 @@
     // function to preview icon
     $("#cat-icon").change(function() {
         var icon = $("#cat-icon").val();
-        $("#selected-icon").attr('class', 'fas ' + icon);
+        $("#selected-icon").attr('class', 'fa-solid ' + icon);
     });
 
     // function to preview icon edit
     $("#cat-icon-edit").change(function() {
         var icon = $("#cat-icon-edit").val();
-        $("#selected-icon-edit").attr('class', 'fas ' + icon);
+        $("#selected-icon-edit").attr('class', 'fa-solid ' + icon);
     });
 </script>
