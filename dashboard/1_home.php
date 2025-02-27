@@ -1263,10 +1263,11 @@
         $('#laporan-pie').removeClass('btn-primary').addClass('btn-secondary').prop('disabled', true);
         $('#laporan-bar').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
         $('#laporan-anggaran').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
+
         if ($('#last-month-nav').hasClass('font-weight-bold')) {
-            getDataChartLastMonth('pie');
+            getDataChartLastMonth('bunder');
         } else {
-            getDataChart('pie');
+            getDataChart('bunder');
         }
     });
 
@@ -1274,6 +1275,7 @@
         $('#laporan-pie').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
         $('#laporan-bar').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
         $('#laporan-anggaran').removeClass('btn-primary').addClass('btn-secondary').prop('disabled', true);
+
         if ($('#last-month-nav').hasClass('font-weight-bold')) {
             getDataChartLastMonth('anggaran');
         } else {

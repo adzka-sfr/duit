@@ -116,7 +116,9 @@ if ($jwt === null) {
                 },
                 tooltip: {
                     trigger: 'item',
-                    formatter: '{a} <br/>{b}: {c} ({d}%)' // Shows percentage in tooltip
+                    formatter: function(params) {
+                        return params.seriesName + '<br/>' + params.name + ': ' + params.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' (' + params.percent + '%)';
+                    }
                 },
                 legend: {
                     orient: 'vertical',
