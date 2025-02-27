@@ -65,9 +65,10 @@
     <div class="card-body">
         <div class="row">
             <div class="col-12 text-center">
-                <button id="laporan-bar" disabled class="btn btn-sm btn-secondary" style="font-size: 0.6em; width: 30%;">Jumlah</button>
-                <button id="laporan-pie" class="btn btn-sm btn-primary" style="font-size: 0.6em; width: 30%;">Persentase</button>
-                <button id="laporan-anggaran" class="btn btn-sm btn-primary" style="font-size: 0.6em; width: 30%;">Anggaran</button>
+                <button id="laporan-balance" disabled class="btn btn-sm btn-secondary" style="font-size: 0.6em; width: 20%;">Balance</button>
+                <button id="laporan-bar" disabled class="btn btn-sm btn-primary" style="font-size: 0.6em; width: 20%;">Jumlah</button>
+                <button id="laporan-pie" class="btn btn-sm btn-primary" style="font-size: 0.6em; width: 20%;">Persentase</button>
+                <button id="laporan-anggaran" class="btn btn-sm btn-primary" style="font-size: 0.6em; width: 20%;">Anggaran</button>
             </div>
         </div>
         <div class="row">
@@ -1027,7 +1028,7 @@
         if (!$(this).hasClass('font-weight-bold')) {
             $(this).addClass('font-weight-bold').css({
                 'color': 'black',
-                'font-size': '1em'               
+                'font-size': '1em'
             }).prop('disabled', true);
             $('#last-month-nav').removeClass('font-weight-bold').css({
                 'color': 'darkgrey',
@@ -1242,13 +1243,25 @@
         $('#data-report').hide();
         $('#add-data').hide();
 
-        $('#laporan-bar').trigger('click');
+        $('#laporan-balance').trigger('click');
     });
 
+    $('#laporan-balance').click(function() {
+        $('#laporan-balance').removeClass('btn-primary').addClass('btn-secondary').prop('disabled', true);
+        $('#laporan-bar').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
+        $('#laporan-pie').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
+        $('#laporan-anggaran').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
 
+        if ($('#last-month-nav').hasClass('font-weight-bold')) {
+            getDataChartLastMonth('balance');
+        } else {
+            getDataChart('balance');
+        }
+    });
 
     $('#laporan-bar').click(function() {
         $('#laporan-pie').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
+        $('#laporan-balance').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
         $('#laporan-bar').removeClass('btn-primary').addClass('btn-secondary').prop('disabled', true);
         $('#laporan-anggaran').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
 
@@ -1262,6 +1275,7 @@
     $('#laporan-pie').click(function() {
         $('#laporan-pie').removeClass('btn-primary').addClass('btn-secondary').prop('disabled', true);
         $('#laporan-bar').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
+        $('#laporan-balance').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
         $('#laporan-anggaran').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
 
         if ($('#last-month-nav').hasClass('font-weight-bold')) {
@@ -1274,6 +1288,7 @@
     $('#laporan-anggaran').click(function() {
         $('#laporan-pie').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
         $('#laporan-bar').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
+        $('#laporan-balance').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
         $('#laporan-anggaran').removeClass('btn-primary').addClass('btn-secondary').prop('disabled', true);
 
         if ($('#last-month-nav').hasClass('font-weight-bold')) {

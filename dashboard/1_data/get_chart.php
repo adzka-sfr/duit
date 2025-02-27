@@ -40,7 +40,7 @@ if ($jwt === null) {
             option = {
                 title: {
                     text: 'Semua Pengeluaran',
-                    subtext: 'Data from Database',
+                    subtext: 'Bulan : <?= $month ?>',
                     left: 'right'
                 },
                 tooltip: {
@@ -87,6 +87,93 @@ if ($jwt === null) {
             option && myChart.setOption(option);
         </script>
     <?php
+    } elseif ($type_chart == 'balance') {
+        $stmt = $connect->prepare("SELECT c_total_income, c_total_outcome FROM v_monthly_balance WHERE c_username = :username AND c_month = :monthe");
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':monthe', $month);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $pemasukan = $result[0]['c_total_income'];
+        $pengeluaran = $result[0]['c_total_outcome'];
+    ?>
+        <div id="bancance" style="height:500px; width: 100%; margin-top: 20px;"></div>
+        <script>
+            var chartDom = document.getElementById('bancance');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            option = {
+                title: {
+                    text: 'Pemasukan X Pengeluaran',
+                    subtext: 'Bulan : <?= $month ?>',
+                    left: 'right'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left'
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'value',
+                    boundaryGap: [0, 0.01],
+                    axisLabel: {
+                        show: false
+                    }
+                },
+                yAxis: {
+                    type: 'category',
+                    data: ['<?= date('M', strtotime($month)) ?>']
+                },
+                series: [{
+                        name: 'Pemasukan',
+                        type: 'bar',
+                        data: [<?= $pemasukan ?>],
+                        itemStyle: {
+                            color: '#91CC75'
+                        },
+                        label: {
+                            show: true,
+                            position: 'insideLeft',
+                            align: 'left',
+                            formatter: function(params) {
+                                return params.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                            }
+                        }
+                    },
+                    {
+                        name: 'Pengeluaran',
+                        type: 'bar',
+                        data: [<?= $pengeluaran ?>],
+                        itemStyle: {
+                            color: '#EE6666'
+                        },
+                        label: {
+                            show: true,
+                            position: 'insideLeft',
+                            align: 'left',
+                            formatter: function(params) {
+                                return params.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                            }
+                        }
+                    }
+                ]
+            };
+
+            option && myChart.setOption(option);
+        </script>
+    <?php
     } elseif ($type_chart == 'bunder') {
         $stmt = $connect->prepare("SELECT c_category_id, c_category_name, c_total FROM v_category_outcome_monthly WHERE c_username = :username AND c_month = :month ORDER BY c_total ASC");
         $stmt->bindParam(':username', $username);
@@ -111,7 +198,7 @@ if ($jwt === null) {
             option = {
                 title: {
                     text: 'Semua Pengeluaran',
-                    subtext: 'Fake Data',
+                    subtext: 'Bulan : <?= $month ?>',
                     left: 'right'
                 },
                 tooltip: {
@@ -170,7 +257,7 @@ if ($jwt === null) {
             option = {
                 title: {
                     text: 'Anggaran X Pengeluaran',
-                    subtext: 'Data from Database',
+                    subtext: 'Bulan : <?= $month ?>',
                     left: 'right'
                 },
                 tooltip: {
