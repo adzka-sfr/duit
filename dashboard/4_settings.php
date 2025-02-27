@@ -70,6 +70,9 @@
 
     $('#save-theme').click(function() {
         var color = $('#colorInput').val();
+        $('#colorInput').prop('disabled', true);
+        $('#save-theme').prop('disabled', true);
+
         $.ajax({
             url: '4_data/act_set_theme.php',
             type: 'POST',
@@ -77,6 +80,9 @@
                 color: color
             },
             success: function(data) {
+                $('#colorInput').prop('disabled', false);
+                $('#save-theme').prop('disabled', false);
+
                 if (data == "success") {
                     Swal.fire({
                         icon: 'success',
@@ -99,10 +105,14 @@
 
     // function to get email
     function getEmail() {
+        $('#email').prop('disabled', true);
+        $('#save-email').prop('disabled', true);
         $.ajax({
             url: '4_data/act_get_email.php',
             type: 'GET',
             success: function(data) {
+                $('#email').prop('disabled', false);
+                $('#save-email').prop('disabled', false);
                 $('#email').val(data);
             }
         });
@@ -112,7 +122,10 @@
     $('#save-email').click(function() {
         var email = $('#email').val();
         var emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail\.com|outlook\.com|yahoo\.com)$/;
-        if (email == "") {
+
+        $('#error-email-empty').hide();
+
+        if ($.trim(email) == "") {
             $('#error-email-empty').show();
         } else if (!emailPattern.test(email)) {
             Swal.fire({
@@ -122,6 +135,9 @@
                 showConfirmButton: true
             });
         } else {
+            $('#email').prop('disabled', true);
+            $('#save-email').prop('disabled', true);
+
             $.ajax({
                 url: '4_data/act_set_email.php',
                 type: 'POST',
@@ -129,6 +145,9 @@
                     email: email
                 },
                 success: function(data) {
+                    $('#email').prop('disabled', false);
+                    $('#save-email').prop('disabled', false);
+
                     if (data == "email-exist") {
                         Swal.fire({
                             icon: 'error',
@@ -161,11 +180,19 @@
     $('#save-password').click(function() {
         var newPassword = $('#new-password').val();
         var oldPassword = $('#old-password').val();
+
+        $('#error-new-password-empty').hide();
+        $('#error-old-password-empty').hide();
+
         if ($.trim(newPassword) == "") {
             $('#error-new-password-empty').show();
         } else if ($.trim(oldPassword) == "") {
             $('#error-old-password-empty').show();
         } else {
+            $('#new-password').prop('disabled', true);
+            $('#old-password').prop('disabled', true);
+            $('#save-password').prop('disabled', true);
+
             $.ajax({
                 url: '4_data/act_set_password.php',
                 type: 'POST',
@@ -174,6 +201,10 @@
                     oldPassword: oldPassword
                 },
                 success: function(data) {
+                    $('#new-password').prop('disabled', false);
+                    $('#old-password').prop('disabled', false);
+                    $('#save-password').prop('disabled', false);
+                    
                     if (data == "password-error") {
                         Swal.fire({
                             icon: 'error',
