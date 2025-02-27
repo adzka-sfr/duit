@@ -7,7 +7,8 @@
         </div>
         <div class="row">
             <div class="col-12 text-center mb-0">
-                <h3 id='kekayaan' class="mb-0"><sup>Rp</sup> 0 </h3>
+                <h3 id='kekayaan' class="mb-0" style="display: none;"><sup>Rp</sup></h3>
+                <h3 id="kekayaan-loading"><i class="fa-solid fa-circle-notch fa-spin"></i></h3>
             </div>
         </div>
         <div class="row">
@@ -31,6 +32,7 @@
                     <tr style="margin: 0; padding: 0;">
                         <td style="margin: 0; padding: 0;">Saldo awal</td>
                         <td style="text-align: right; margin: 0; padding: 0;" id="last-month-balance"></td>
+                        <td><i class="fa-solid fa-circle-notch fa-spin"></i></td>
                     </tr>
                     <tr style="margin: 0; padding: 0;">
                         <td style="margin: 0; padding: 0;">Saldo akhir</td>
@@ -388,10 +390,14 @@
 
     // function to get kekayaan
     function getKekayaan() {
+        $('#kekayaan-loading').show();
+        $('#kekayaan').hide();
         $.ajax({
             url: '1_data/get_kekayaan.php',
             type: 'POST',
             success: function(response) {
+                $('#kekayaan-loading').hide();
+                $('#kekayaan').show();
                 var response = JSON.parse(response);
                 var formattedKekayaan = parseInt(response.kekayaan).toLocaleString('en-US');
                 $('#kekayaan').html('<sup>Rp</sup> ' + formattedKekayaan);
