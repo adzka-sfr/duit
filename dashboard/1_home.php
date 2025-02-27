@@ -1294,6 +1294,9 @@
         $('#data-report').hide();
         $('#add-data').hide();
         $('#data-cari').show();
+        $('#kata-kunci').val('');
+        $('#data-cari-table').hide();
+
     });
 
     $('#laporan-balance').click(function() {

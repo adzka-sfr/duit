@@ -191,6 +191,21 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Icon</label>
+                            <select class="search-biasa" style="width: 100%;" name="cat-icon-edit" id="cat-icon-edit">
+                            </select>
+                            <span id="error-cat-icon-edit" style="color: #DC3545; display: none; font-size:0.7em"><i class="fa-solid fa-circle-info"></i> Silahkan pilih icon</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mt-3 text-center">
+                        <i id="selected-icon-edit" class="fas fa-icons" style="font-size: 1.5em;"></i>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-12 mt-3">
                         <div class="form-group input-group-sm">
                             <label for="edit-status">Status</label>
@@ -485,6 +500,9 @@
         } else {
             $('#edit-status').prop('checked', false);
         }
+
+        getIconList();
+
         // open modal
         $('#modal-edit-kategori').modal('show');
     }
@@ -815,9 +833,32 @@
         });
     }
 
+    // function to get list icon
+    function getIconListEdit() {
+        $('#cat-icon-edit').prop('disabled', true);
+        $.ajax({
+            url: "2_data/act_get_icon.php",
+            type: "POST",
+            success: function(response) {
+                $('#cat-icon-edit').prop('disabled', false);
+                $("#cat-icon-edit").html(response);
+                // Initialize select2 after loading the icons
+                $('#cat-icon-edit').select2({
+                    dropdownParent: $('#modal-edit-kategori')
+                });
+            }
+        });
+    }
+
     // function to preview icon
     $("#cat-icon").change(function() {
         var icon = $("#cat-icon").val();
         $("#selected-icon").attr('class', 'fas ' + icon);
+    });
+
+    // function to preview icon edit
+    $("#cat-icon-edit").change(function() {
+        var icon = $("#cat-icon-edit").val();
+        $("#selected-icon-edit").attr('class', 'fas ' + icon);
     });
 </script>
