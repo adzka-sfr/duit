@@ -13,6 +13,7 @@ if ($jwt === null) {
     $username = $user['username'];
     $type_chart = $_POST['jenis_chart'];
     $month = $_POST['bulan'] ?? date('Y-m', strtotime($now));
+    // $month = date('Y-m', strtotime($month));
 
     if ($type_chart == 'bare') {
 
@@ -165,71 +166,71 @@ if ($jwt === null) {
             var option;
 
             option = {
-            title: {
-                text: 'Anggaran X Pengeluaran',
-                subtext: 'Data from Database',
-                left: 'right'
-            },
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                type: 'shadow'
-                }
-            },
-            legend: {
-                orient: 'vertical',
-                left: 'left'
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-            },
-            xAxis: {
-                type: 'value',
-                boundaryGap: [0, 0.01],
-                axisLabel: {
-                show: false
-                }
-            },
-            yAxis: {
-                type: 'category',
-                data: <?php echo json_encode($categories); ?>
-            },
-            series: [{
-                name: 'Anggaran',
-                type: 'bar',
-                data: <?php echo json_encode($budgets); ?>,
-                itemStyle: {
-                    color: '#EE6666'
+                title: {
+                    text: 'Anggaran X Pengeluaran',
+                    subtext: 'Data from Database',
+                    left: 'right'
                 },
-                label: {
-                    show: true,
-                    position: 'insideLeft',
-                    align: 'left',
-                    formatter: function(params) {
-                    return params.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
                     }
-                }
                 },
-                {
-                name: 'Aktual',
-                type: 'bar',
-                data: <?php echo json_encode($totals); ?>,
-                itemStyle: {
-                    color: '#91CC75'
+                legend: {
+                    orient: 'vertical',
+                    left: 'left'
                 },
-                label: {
-                    show: true,
-                    position: 'insideLeft',
-                    align: 'left',
-                    formatter: function(params) {
-                    return params.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'value',
+                    boundaryGap: [0, 0.01],
+                    axisLabel: {
+                        show: false
                     }
-                }
-                }
-            ]
+                },
+                yAxis: {
+                    type: 'category',
+                    data: <?php echo json_encode($categories); ?>
+                },
+                series: [{
+                        name: 'Anggaran',
+                        type: 'bar',
+                        data: <?php echo json_encode($budgets); ?>,
+                        itemStyle: {
+                            color: '#EE6666'
+                        },
+                        label: {
+                            show: true,
+                            position: 'insideLeft',
+                            align: 'left',
+                            formatter: function(params) {
+                                return params.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                            }
+                        }
+                    },
+                    {
+                        name: 'Aktual',
+                        type: 'bar',
+                        data: <?php echo json_encode($totals); ?>,
+                        itemStyle: {
+                            color: '#91CC75'
+                        },
+                        label: {
+                            show: true,
+                            position: 'insideLeft',
+                            align: 'left',
+                            formatter: function(params) {
+                                return params.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                            }
+                        }
+                    }
+                ]
             };
 
             option && myChart.setOption(option);
@@ -246,6 +247,6 @@ if ($jwt === null) {
             //     }
             // });
         </script>
-    <?php
+<?php
     }
 }

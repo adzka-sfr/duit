@@ -71,8 +71,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12" id="data-laporan-chart">
+            <div class="col-12" id="data-laporan-chart" style="display: none;">
 
+            </div>
+            <div class="col-12" id="data-laporan-chart-loading" style="text-align: center; margin-top: 50px;">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
             </div>
         </div>
     </div>
@@ -294,7 +297,10 @@
     </div>
 </div>
 
-<div id="data-report" style="text-align: center;">
+<div id="data-report" style="text-align: center; display:none;">
+</div>
+<div id="data-report-loading" style="text-align: center; margin-top: 50px;">
+    <i class="fa-solid fa-circle-notch fa-spin"></i>
 </div>
 
 <!-- modal lihat saldo -->
@@ -305,8 +311,11 @@
                 <h5 class="modal-title fs-5" id="exampleModalLabel">Saldo Anda</h5>
 
             </div>
-            <div class="modal-body" id="data-value-saldo">
+            <div class="modal-body" id="data-value-saldo" style="display: none;">
 
+            </div>
+            <div class="modal-body" id="data-value-saldo-loading">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
@@ -324,8 +333,11 @@
             <div class="modal-header">
                 <h5 class="modal-title fs-5" id="exampleModalLabel">Transaksi <b id="date-transaksi"></b></h5>
             </div>
-            <div class="modal-body" id="data-value-transaksi">
+            <div class="modal-body" id="data-value-transaksi" style="display: none;">
 
+            </div>
+            <div class="modal-body" id="data-value-transaksi-loading">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
@@ -432,6 +444,12 @@
     // functioni to get kekayaan by month
     function getKekayaanLastMonth() {
         var month = $('#select-last-month').val();
+        $('#last-month-balance-loading').show();
+        $('#last-month-balance').hide();
+        $('#this-month-balance-loading').show();
+        $('#this-month-balance').hide();
+        $('#difference-balance-loading').show();
+        $('#difference-balance').hide();
         $.ajax({
             url: '1_data/get_kekayaan_last_month.php',
             type: 'POST',
@@ -439,6 +457,13 @@
                 month: month
             },
             success: function(response) {
+                $('#last-month-balance-loading').hide();
+                $('#last-month-balance').show();
+                $('#this-month-balance-loading').hide();
+                $('#this-month-balance').show();
+                $('#difference-balance-loading').hide();
+                $('#difference-balance').show();
+
                 var response = JSON.parse(response);
                 $('#last-month-balance').html('<sup>Rp</sup> ' + parseInt(response.last_month_balance).toLocaleString('en-US'));
                 $('#this-month-balance').html('<sup>Rp</sup> ' + parseInt(response.this_month_balance).toLocaleString('en-US'));
@@ -456,10 +481,14 @@
 
     // function to get data report
     function getDataReport() {
+        $('#data-report-loading').show();
+        $('#data-report').hide();
         $.ajax({
             url: '1_data/get_report.php',
             type: 'POST',
             success: function(response) {
+                $('#data-report-loading').hide();
+                $('#data-report').show();
                 $('#data-report').html(response);
             }
         });
@@ -468,6 +497,8 @@
     // function to get data report by month
     function getDataReportByMonth() {
         var month = $('#select-last-month').val();
+        $('#data-report-loading').show();
+        $('#data-report').hide();
         $.ajax({
             url: '1_data/get_report_last_month.php',
             type: 'POST',
@@ -475,6 +506,8 @@
                 month: month
             },
             success: function(response) {
+                $('#data-report-loading').hide();
+                $('#data-report').show();
                 $('#data-report').html(response);
             }
         });
@@ -690,6 +723,13 @@
             return;
         }
 
+        $('#category-out').prop('disabled', true);
+        $('#method-out').prop('disabled', true);
+        $('#nominal-out').prop('disabled', true);
+        $('#detail-out').prop('disabled', true);
+        $('#time-out').prop('disabled', true);
+        $('#save-out').prop('disabled', true);
+
         $.ajax({
             url: '1_data/save_outcome.php',
             type: 'POST',
@@ -701,6 +741,12 @@
                 time: time
             },
             success: function(response) {
+                $('#category-out').prop('disabled', false);
+                $('#method-out').prop('disabled', false);
+                $('#nominal-out').prop('disabled', false);
+                $('#detail-out').prop('disabled', false);
+                $('#time-out').prop('disabled', false);
+                $('#save-out').prop('disabled', false);
                 if (response == 'success') {
                     $('#budget').val('');
                     $('#saldo').val('');
@@ -784,6 +830,13 @@
             $('#error-time-in').hide();
         }
 
+        $('#category-in').prop('disabled', true);
+        $('#method-in').prop('disabled', true);
+        $('#nominal-in').prop('disabled', true);
+        $('#detail-in').prop('disabled', true);
+        $('#time-in').prop('disabled', true);
+        $('#save-in').prop('disabled', true);
+
         $.ajax({
             url: '1_data/save_income.php',
             type: 'POST',
@@ -795,6 +848,13 @@
                 time: time
             },
             success: function(response) {
+                $('#category-in').prop('disabled', false);
+                $('#method-in').prop('disabled', false);
+                $('#nominal-in').prop('disabled', false);
+                $('#detail-in').prop('disabled', false);
+                $('#time-in').prop('disabled', false);
+                $('#save-in').prop('disabled', false);
+
                 if (response == 'success') {
                     $('#nominal-in').val('');
                     $('#detail-in').val('');
@@ -871,6 +931,12 @@
             return;
         }
 
+        $('#topup-from').prop('disabled', true);
+        $('#topup-to').prop('disabled', true);
+        $('#nominal-topup').prop('disabled', true);
+        $('#time-topup').prop('disabled', true);
+        $('#save-topup').prop('disabled', true);
+
         $.ajax({
             url: '1_data/save_topup.php',
             type: 'POST',
@@ -881,6 +947,12 @@
                 time: time
             },
             success: function(response) {
+                $('#topup-from').prop('disabled', false);
+                $('#topup-to').prop('disabled', false);
+                $('#nominal-topup').prop('disabled', false);
+                $('#time-topup').prop('disabled', false);
+                $('#save-topup').prop('disabled', false);
+
                 if (response == 'success') {
                     $('#nominal-topup').val('');
                     $('#time-topup').val('');
@@ -912,7 +984,10 @@
 
     // function to open detail transaction
     function openDetailTransaction(id, statuse, date) {
+
         $('#modal-lihat-transaksi').modal('show');
+        $('#data-value-transaksi').hide();
+        $('#data-value-transaksi-loading').show();
         $('#date-transaksi').html(date);
         $.ajax({
             url: '1_data/get_detail_transaction.php',
@@ -922,6 +997,8 @@
                 statuse: statuse
             },
             success: function(response) {
+                $('#data-value-transaksi-loading').hide();
+                $('#data-value-transaksi').show();
                 $('#data-value-transaksi').html(response);
             }
         });
@@ -939,6 +1016,7 @@
                 'font-size': '1em'
             }).prop('disabled', false);
             $('#select-last-month').show();
+            $('#input-page').trigger('click');
             getLastMonth();
             getKekayaanLastMonth();
             getDataReportByMonth();
@@ -955,6 +1033,7 @@
                 'color': 'darkgrey',
                 'font-size': '1em'
             }).prop('disabled', false);
+            $('#input-page').trigger('click');
             $('#select-last-month').hide();
             getKekayaan();
             getDataReport();
@@ -973,11 +1052,15 @@
 
     // function to open modal lihat saldo
     $('#lihat-saldo').click(function() {
+        $('#data-value-saldo').hide();
+        $('#data-value-saldo-loading').show();
         $('#modal-lihat-saldo').modal('show');
         $.ajax({
             url: '1_data/get_saldo_resume.php',
             type: 'POST',
             success: function(response) {
+                $('#data-value-saldo-loading').hide();
+                $('#data-value-saldo').show();
                 $('#data-value-saldo').html(response);
             }
         });
@@ -996,6 +1079,13 @@
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.isConfirmed) {
+                $('#category-transaction').prop('disabled', true);
+                $('#method-transaction').prop('disabled', true);
+                $('#nominal-transaction').prop('disabled', true);
+                $('#detail-transaction').prop('disabled', true);
+                $('#time-transaction').prop('disabled', true);
+                $('#update-transaction').prop('disabled', true);
+
                 $.ajax({
                     url: '1_data/delete_transaction.php',
                     type: 'POST',
@@ -1004,6 +1094,13 @@
                         statuse: statuse
                     },
                     success: function(response) {
+                        $('#category-transaction').prop('disabled', false);
+                        $('#method-transaction').prop('disabled', false);
+                        $('#nominal-transaction').prop('disabled', false);
+                        $('#detail-transaction').prop('disabled', false);
+                        $('#time-transaction').prop('disabled', false);
+                        $('#update-transaction').prop('disabled', false);
+
                         if (response == 'success') {
                             Swal.fire(
                                 'Terhapus!',
@@ -1080,6 +1177,14 @@
             return;
         }
 
+        $('#category-transaction').prop('disabled', true);
+        $('#method-transaction').prop('disabled', true);
+        $('#nominal-transaction').prop('disabled', true);
+        $('#detail-transaction').prop('disabled', true);
+        $('#time-transaction').prop('disabled', true);
+        $('#update-transaction').prop('disabled', true);
+
+
         $.ajax({
             url: '1_data/update_transaction.php',
             type: 'POST',
@@ -1093,6 +1198,13 @@
                 time: time
             },
             success: function(response) {
+                $('#category-transaction').prop('disabled', false);
+                $('#method-transaction').prop('disabled', false);
+                $('#nominal-transaction').prop('disabled', false);
+                $('#detail-transaction').prop('disabled', false);
+                $('#time-transaction').prop('disabled', false);
+                $('#update-transaction').prop('disabled', false);
+
                 if (response == 'success') {
                     Swal.fire({
                         icon: 'success',
@@ -1139,25 +1251,40 @@
         $('#laporan-pie').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
         $('#laporan-bar').removeClass('btn-primary').addClass('btn-secondary').prop('disabled', true);
         $('#laporan-anggaran').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
-        getDataChart('bare')
+
+        if ($('#last-month-nav').hasClass('font-weight-bold')) {
+            getDataChartLastMonth('bare');
+        } else {
+            getDataChart('bare');
+        }
     });
 
     $('#laporan-pie').click(function() {
         $('#laporan-pie').removeClass('btn-primary').addClass('btn-secondary').prop('disabled', true);
         $('#laporan-bar').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
         $('#laporan-anggaran').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
-        getDataChart('bunder')
+        if ($('#last-month-nav').hasClass('font-weight-bold')) {
+            getDataChartLastMonth('pie');
+        } else {
+            getDataChart('pie');
+        }
     });
 
     $('#laporan-anggaran').click(function() {
         $('#laporan-pie').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
         $('#laporan-bar').removeClass('btn-secondary').addClass('btn-primary').prop('disabled', false);
         $('#laporan-anggaran').removeClass('btn-primary').addClass('btn-secondary').prop('disabled', true);
-        getDataChart('anggar')
+        if ($('#last-month-nav').hasClass('font-weight-bold')) {
+            getDataChartLastMonth('anggaran');
+        } else {
+            getDataChart('anggaran');
+        }
     });
 
     // function to get data chart
     function getDataChart(jenis_chart) {
+        $('#data-laporan-chart').hide();
+        $('#data-laporan-chart-loading').show();
         $.ajax({
             url: '1_data/get_chart.php',
             type: 'POST',
@@ -1165,6 +1292,28 @@
                 jenis_chart: jenis_chart
             },
             success: function(response) {
+                $('#data-laporan-chart').show();
+                $('#data-laporan-chart-loading').hide();
+                $('#data-laporan-chart').html(response);
+            }
+        });
+    }
+
+    // function to get data chart last month
+    function getDataChartLastMonth(jenis_chart) {
+        $('#data-laporan-chart').hide();
+        $('#data-laporan-chart-loading').show();
+        var monthe = $('#select-last-month').val();
+        $.ajax({
+            url: '1_data/get_chart.php',
+            type: 'POST',
+            data: {
+                jenis_chart: jenis_chart,
+                bulan: monthe
+            },
+            success: function(response) {
+                $('#data-laporan-chart').show();
+                $('#data-laporan-chart-loading').hide();
                 $('#data-laporan-chart').html(response);
             }
         });
