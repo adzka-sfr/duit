@@ -12,11 +12,3 @@ do this :
     - root
         1. _header.php
         2. index.php
-
-library
-kirim email pake phpmailer
-exception
-SMTP
-
-email : information_system@duit.adzkasfr.com
-password : Alfianwai1!
