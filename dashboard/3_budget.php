@@ -11,8 +11,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 mt-3" id="data-value-budget">
+            <div class="col-12 mt-3" id="data-value-budget" style="display: none;">
 
+            </div>
+            <div class="col-12 mt-3 text-center" id="data-value-budget-loading">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
             </div>
         </div>
     </div>
@@ -120,6 +123,8 @@
     // function when month is changed
     function getBudget() {
         var month = $('#month').val();
+        $('#data-value-budget').hide();
+        $('#data-value-budget-loading').show();
         $.ajax({
             url: '3_data/act_get_budget.php',
             type: 'POST',
@@ -127,6 +132,8 @@
                 month: month
             },
             success: function(data) {
+                $('#data-value-budget-loading').hide();
+                $('#data-value-budget').show();
                 $('#data-value-budget').html(data);
             }
         });
@@ -185,11 +192,18 @@
         var cat = $('#cat-budget').val();
         var nominal = $('#nominal-budget').val();
 
+        $('#error-cat-budget').hide();
+        $('#error-nominal-budget').hide();
+
         if (cat === '') {
             $('#error-cat-budget').show();
         } else if (nominal === '' || nominal <= 0) {
             $('#error-nominal-budget').show();
         } else {
+            $('#cat-budget').prop('disabled', true);
+            $('#nominal-budget').prop('disabled', true);
+            $('#save-budget').prop('disabled', true);
+
             $.ajax({
                 url: '3_data/act_set_budget.php',
                 type: 'POST',
@@ -199,6 +213,10 @@
                     nominal: nominal
                 },
                 success: function(data) {
+                    $('#cat-budget').prop('disabled', false);
+                    $('#nominal-budget').prop('disabled', false);
+                    $('#save-budget').prop('disabled', false);
+
                     if (data == 'success') {
                         $('#modal-tambah-anggaran').modal('hide');
                         $('#nominal-budget').prop('disabled', true);
@@ -244,9 +262,15 @@
         var id = $('#budget-id').val();
         var nominal = $('#nominal-budget-edit').val();
 
+        $('#error-nominal-budget-edit').hide();
+
         if (nominal === '' || nominal <= 0) {
             $('#error-nominal-budget-edit').show();
         } else {
+            $('#nominal-budget-edit').prop('disabled', true);
+            $('#delete-budget').prop('disabled', true);
+            $('#save-budget-edit').prop('disabled', true);
+
             $.ajax({
                 url: '3_data/act_edit_budget.php',
                 type: 'POST',
@@ -255,6 +279,10 @@
                     nominal: nominal
                 },
                 success: function(data) {
+                    $('#nominal-budget-edit').prop('disabled', false);
+                    $('#delete-budget').prop('disabled', false);
+                    $('#save-budget-edit').prop('disabled', false);
+
                     if (data == 'success') {
                         $('#modal-edit-anggaran').modal('hide');
                         $('#nominal-budget-edit').prop('disabled', true);
@@ -291,6 +319,10 @@
             confirmButtonText: 'Ya, hapus!'
         }).then((result) => {
             if (result.isConfirmed) {
+                $('#nominal-budget-edit').prop('disabled', true);
+                $('#delete-budget').prop('disabled', true);
+                $('#save-budget-edit').prop('disabled', true);
+
                 $.ajax({
                     url: '3_data/act_delete_budget.php',
                     type: 'POST',
@@ -298,6 +330,10 @@
                         id: id
                     },
                     success: function(data) {
+                        $('#nominal-budget-edit').prop('disabled', false);
+                        $('#delete-budget').prop('disabled', false);
+                        $('#save-budget-edit').prop('disabled', false);
+
                         if (data == 'success') {
                             $('#modal-edit-anggaran').modal('hide');
                             getBudget();
