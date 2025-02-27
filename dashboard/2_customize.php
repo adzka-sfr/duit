@@ -11,8 +11,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 mt-3" id="data-value-category">
+            <div class="col-12 mt-3" id="data-value-category" style="display: none;">
 
+            </div>
+            <div class="col-12 mt-3 text-center" id="data-value-category-loading">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
             </div>
         </div>
     </div>
@@ -31,8 +34,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 mt-3" id="data-value-method">
+            <div class="col-12 mt-3" id="data-value-method" style="display: none;">
 
+            </div>
+            <div class="col-12 mt-3 text-center" id="data-value-method-loading">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
             </div>
         </div>
     </div>
@@ -300,6 +306,12 @@
         } else if (icon == "") {
             $('#error-cat-icon').show();
         } else {
+            $('#cat-name').prop('disabled', true);
+            $('#retain-capital').prop('disabled', true);
+            $("input[name='cat-type']").prop('disabled', true);
+            $('#cat-icon').prop('disabled', true);
+            $('#save-category').prop('disabled', true);
+
             $.ajax({
                 url: "2_data/act_add_category.php",
                 type: "POST",
@@ -310,6 +322,12 @@
                     icon: icon
                 },
                 success: function(response) {
+                    $('#cat-name').prop('disabled', false);
+                    $('#retain-capital').prop('disabled', false);
+                    $("input[name='cat-type']").prop('disabled', false);
+                    $('#cat-icon').prop('disabled', false);
+                    $('#save-category').prop('disabled', false);
+
                     if (response == "success") {
                         Swal.fire({
                             icon: 'success',
@@ -360,9 +378,13 @@
         // Reset error messages
         $("#error-method-name").hide();
 
-        if (methodName == "") {
+        if ($.trim(methodName) == "") {
             $("#error-method-name").show();
         } else {
+            $('#method-name').prop('disabled', true);
+            $('#retain-capital-method').prop('disabled', true);
+            $('#save-method').prop('disabled', true);
+
             $.ajax({
                 url: "2_data/act_add_method.php",
                 type: "POST",
@@ -371,7 +393,9 @@
                     retainCapital: retainCapital
                 },
                 success: function(response) {
-                    console.log(response);
+                    $('#method-name').prop('disabled', false);
+                    $('#retain-capital-method').prop('disabled', false);
+                    $('#save-method').prop('disabled', false);
 
                     if (response == "success") {
                         Swal.fire({
@@ -416,10 +440,14 @@
 
     // function to get data category
     function getCategory() {
+        $('#data-value-category').hide();
+        $('#data-value-category-loading').show();
         $.ajax({
             url: "2_data/act_get_category.php",
             type: "POST",
             success: function(response) {
+                $('#data-value-category').show();
+                $('#data-value-category-loading').hide();
                 $("#data-value-category").html(response);
             }
         });
@@ -427,10 +455,14 @@
 
     // function to get data method
     function getMethod() {
+        $('#data-value-method').hide();
+        $('#data-value-method-loading').show();
         $.ajax({
             url: "2_data/act_get_method.php",
             type: "POST",
             success: function(response) {
+                $('#data-value-method').show();
+                $('#data-value-method-loading').hide();
                 $("#data-value-method").html(response);
             }
         });
@@ -467,9 +499,16 @@
         // Reset error messages
         $("#error-edit-cat-name").hide();
 
-        if (catName == "") {
+        if ($.trim(catName) == "") {
             $("#error-edit-cat-name").show();
         } else {
+            $('#edit-cat-name').prop('disabled', true);
+            $('#edit-retain-capital').prop('disabled', true);
+            $("input[name='edit-cat-type']").prop('disabled', true);
+            $('#edit-status').prop('disabled', true);
+            $('#save-edit-category').prop('disabled', true);
+            $('#delete-category').prop('disabled', true);
+
             $.ajax({
                 url: "2_data/act_edit_category.php",
                 type: "POST",
@@ -480,6 +519,13 @@
                     catStatus: catStatus
                 },
                 success: function(response) {
+                    $('#edit-cat-name').prop('disabled', false);
+                    $('#edit-retain-capital').prop('disabled', false);
+                    $("input[name='edit-cat-type']").prop('disabled', false);
+                    $('#edit-status').prop('disabled', false);
+                    $('#save-edit-category').prop('disabled', false);
+                    $('#delete-category').prop('disabled', false);
+
                     if (response == "success") {
                         Swal.fire({
                             icon: 'success',
@@ -541,9 +587,15 @@
         // Reset error messages
         $("#error-edit-method-name").hide();
 
-        if (methodName == "") {
+        if ($.trim(methodName) == "") {
             $("#error-edit-method-name").show();
         } else {
+            $('#edit-method-name').prop('disabled', true);
+            $('#edit-retain-capital-method').prop('disabled', true);
+            $('#edit-status-method').prop('disabled', true);
+            $('#save-edit-method').prop('disabled', true);
+            $('#delete-method').prop('disabled', true);
+
             $.ajax({
                 url: "2_data/act_edit_method.php",
                 type: "POST",
@@ -554,6 +606,12 @@
                     methodStatus: methodStatus
                 },
                 success: function(response) {
+                    $('#edit-method-name').prop('disabled', false);
+                    $('#edit-retain-capital-method').prop('disabled', false);
+                    $('#edit-status-method').prop('disabled', false);
+                    $('#save-edit-method').prop('disabled', false);
+                    $('#delete-method').prop('disabled', false);
+
                     if (response == "success") {
                         Swal.fire({
                             icon: 'success',
@@ -605,6 +663,13 @@
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.isConfirmed) {
+                $('#edit-cat-name').prop('disabled', true);
+                $('#edit-retain-capital').prop('disabled', true);
+                $("input[name='edit-cat-type']").prop('disabled', true);
+                $('#edit-status').prop('disabled', true);
+                $('#save-edit-category').prop('disabled', true);
+                $('#delete-category').prop('disabled', true);
+
                 $.ajax({
                     url: "2_data/act_delete_category.php",
                     type: "POST",
@@ -612,6 +677,13 @@
                         catId: catId
                     },
                     success: function(response) {
+                        $('#edit-cat-name').prop('disabled', false);
+                        $('#edit-retain-capital').prop('disabled', false);
+                        $("input[name='edit-cat-type']").prop('disabled', false);
+                        $('#edit-status').prop('disabled', false);
+                        $('#save-edit-category').prop('disabled', false);
+                        $('#delete-category').prop('disabled', false);
+
                         if (response == "success") {
                             Swal.fire({
                                 icon: 'success',
@@ -667,6 +739,12 @@
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.isConfirmed) {
+                $('#edit-method-name').prop('disabled', true);
+                $('#edit-retain-capital-method').prop('disabled', true);
+                $('#edit-status-method').prop('disabled', true);
+                $('#save-edit-method').prop('disabled', true);
+                $('#delete-method').prop('disabled', true);
+
                 $.ajax({
                     url: "2_data/act_delete_method.php",
                     type: "POST",
@@ -674,7 +752,11 @@
                         methodId: methodId
                     },
                     success: function(response) {
-                        console.log(response);
+                        $('#edit-method-name').prop('disabled', false);
+                        $('#edit-retain-capital-method').prop('disabled', false);
+                        $('#edit-status-method').prop('disabled', false);
+                        $('#save-edit-method').prop('disabled', false);
+                        $('#delete-method').prop('disabled', false);
 
                         if (response == "success") {
                             Swal.fire({
@@ -718,10 +800,12 @@
 
     // function to get list icon
     function getIconList() {
+        $('#cat-icon').prop('disabled', true);
         $.ajax({
             url: "2_data/act_get_icon.php",
             type: "POST",
             success: function(response) {
+                $('#cat-icon').prop('disabled', false);
                 $("#cat-icon").html(response);
                 // Initialize select2 after loading the icons
                 $('#cat-icon').select2({
