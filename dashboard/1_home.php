@@ -31,12 +31,13 @@
                 <table style="width: 100%; border-collapse: collapse;">
                     <tr style="margin: 0; padding: 0;">
                         <td style="margin: 0; padding: 0;">Saldo awal</td>
-                        <td style="text-align: right; margin: 0; padding: 0;" id="last-month-balance"></td>
-                        <td><i class="fa-solid fa-circle-notch fa-spin"></i></td>
+                        <td style="text-align: right; margin: 0; padding: 0; display:none;" id="last-month-balance"></td>
+                        <td style="text-align: right; margin: 0; padding: 0;" id="last-month-balance-loading"><sup>Rp</sup> <i class="fa-solid fa-circle-notch fa-spin"></i></td>
                     </tr>
                     <tr style="margin: 0; padding: 0;">
                         <td style="margin: 0; padding: 0;">Saldo akhir</td>
-                        <td style="text-align: right; margin: 0; padding: 0;" id="this-month-balance"></td>
+                        <td style="text-align: right; margin: 0; padding: 0; display:none;" id="this-month-balance"></td>
+                        <td style="text-align: right; margin: 0; padding: 0;" id="this-month-balance-loading"><sup>Rp</sup> <i class="fa-solid fa-circle-notch fa-spin"></i></td>
                     </tr>
                     <tr style="margin: 0; padding: 0;">
                         <td style="margin: 0; padding: 0;"></td>
@@ -46,7 +47,8 @@
                     </tr>
                     <tr style="margin: 0; padding: 0;">
                         <td style="margin: 0; padding: 0;"></td>
-                        <th style="text-align: right; margin: 0; padding: 0;" id="difference-balance"></th>
+                        <th style="text-align: right; margin: 0; padding: 0; display:none;" id="difference-balance"></th>
+                        <td style="text-align: right; margin: 0; padding: 0;" id="difference-balance-loading"><sup>Rp</sup> <i class="fa-solid fa-circle-notch fa-spin"></i></td>
                     </tr>
                 </table>
             </div>
@@ -392,12 +394,24 @@
     function getKekayaan() {
         $('#kekayaan-loading').show();
         $('#kekayaan').hide();
+        $('#last-month-balance-loading').show();
+        $('#last-month-balance').hide();
+        $('#this-month-balance-loading').show();
+        $('#this-month-balance').hide();
+        $('#difference-balance-loading').show();
+        $('#difference-balance').hide();
         $.ajax({
             url: '1_data/get_kekayaan.php',
             type: 'POST',
             success: function(response) {
                 $('#kekayaan-loading').hide();
                 $('#kekayaan').show();
+                $('#last-month-balance-loading').hide();
+                $('#last-month-balance').show();
+                $('#this-month-balance-loading').hide();
+                $('#this-month-balance').show();
+                $('#difference-balance-loading').hide();
+                $('#difference-balance').show();
                 var response = JSON.parse(response);
                 var formattedKekayaan = parseInt(response.kekayaan).toLocaleString('en-US');
                 $('#kekayaan').html('<sup>Rp</sup> ' + formattedKekayaan);
