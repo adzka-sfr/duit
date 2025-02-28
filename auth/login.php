@@ -26,7 +26,7 @@
             <a href="main.php?page=register">User baru? Daftar disini</a>
         </div>
 
-        <div class="form-group text-center mt-3">
+        <div class="form-group text-center mt-3" style="font-size: 0.8em;">
             Owner Apps <br><a href="https://adzkasfr.com">Adzka SFR</a>
         </div>
     </div>
