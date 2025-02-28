@@ -37,20 +37,7 @@ if ($jwt === null) {
     (SELECT COALESCE(SUM(c_balance), 0) 
      FROM `v_monthly_balance` 
      WHERE c_username = curr.c_username 
-     AND c_month <= :month) AS c_this_month_balance,
-
-    -- Difference calculation
-    ((SELECT COALESCE(SUM(c_balance), 0) 
-      FROM `v_monthly_balance` 
-      WHERE c_username = curr.c_username 
-      AND c_month <= :month)
-     -
-     (SELECT COALESCE(SUM(c_balance), 0) 
-      FROM `v_monthly_balance` 
-      WHERE c_username = curr.c_username 
-      AND c_month <= :last_month)
-    ) AS c_difference
-
+     AND c_month <= :month) AS c_this_month_balance
         FROM `v_monthly_balance` curr
         WHERE curr.c_month = :month
         AND curr.c_username = :username;
@@ -67,15 +54,13 @@ if ($jwt === null) {
             echo json_encode([
                 'kekayaan' => $total_balance,
                 'last_month_balance' => $comparison_result['c_last_month_balance'],
-                'this_month_balance' => $comparison_result['c_this_month_balance'], // Fix
-                'difference' => $comparison_result['c_difference']
+                'this_month_balance' => $comparison_result['c_this_month_balance']
             ]);
         } else {
             echo json_encode([
                 'kekayaan' => 0,
                 'last_month_balance' => 0,
-                'this_month_balance' => 0,
-                'difference' => 0
+                'this_month_balance' => 0
             ]);
         }
     } catch (PDOException $e) {
