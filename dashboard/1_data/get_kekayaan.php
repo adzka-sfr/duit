@@ -29,29 +29,29 @@ if ($jwt === null) {
     
     -- Sum of all balances up to the last month
     (SELECT COALESCE(SUM(c_balance), 0) 
-     FROM `duit`.`v_monthly_balance` 
+     FROM `v_monthly_balance` 
      WHERE c_username = curr.c_username 
      AND c_month <= :last_month) AS c_last_month_balance,
 
     -- Sum of all balances up to this month
     (SELECT COALESCE(SUM(c_balance), 0) 
-     FROM `duit`.`v_monthly_balance` 
+     FROM `v_monthly_balance` 
      WHERE c_username = curr.c_username 
      AND c_month <= :month) AS c_this_month_balance,
 
     -- Difference calculation
     ((SELECT COALESCE(SUM(c_balance), 0) 
-      FROM `duit`.`v_monthly_balance` 
+      FROM `v_monthly_balance` 
       WHERE c_username = curr.c_username 
       AND c_month <= :month)
      - 
      (SELECT COALESCE(SUM(c_balance), 0) 
-      FROM `duit`.`v_monthly_balance` 
+      FROM `v_monthly_balance` 
       WHERE c_username = curr.c_username 
       AND c_month <= :last_month)
     ) AS c_difference
 
-        FROM `duit`.`v_monthly_balance` curr
+        FROM `v_monthly_balance` curr
         WHERE curr.c_month = :month
         AND curr.c_username = :username;
         ");
