@@ -23,46 +23,47 @@ if ($jwt === null) {
         $total_balance = $result ? $result['total_balance'] : 0;
 
         // Second query to get monthly comparison data
-        $stmt = $connect->prepare("SELECT 
-    curr.c_username,
-    curr.c_month AS c_this_month,
-    
+        $stmt1 = $connect->prepare("SELECT 
     -- Sum of all balances up to the last month
     (SELECT COALESCE(SUM(c_balance), 0) 
      FROM `v_monthly_balance` 
      WHERE c_username = curr.c_username 
-     AND c_month <= :last_month) AS c_last_month_balance,
-
-    -- Sum of all balances up to this month
-    (SELECT COALESCE(SUM(c_balance), 0) 
-     FROM `v_monthly_balance` 
-     WHERE c_username = curr.c_username 
-     AND c_month <= :month) AS c_this_month_balance
+     AND c_month <= :last_month) AS c_last_month_balance
         FROM `v_monthly_balance` curr
         WHERE curr.c_month = :month
         AND curr.c_username = :username;
         ");
 
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-        $stmt->bindParam(':last_month', $last_month, PDO::PARAM_STR);
-        $stmt->bindParam(':month', $month, PDO::PARAM_STR);
-        $stmt->execute();
-        $comparison_result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt1->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt1->bindParam(':last_month', $last_month, PDO::PARAM_STR);
+        $stmt1->bindParam(':month', $month, PDO::PARAM_STR);
+        $stmt1->execute();
+        $last_month = $stmt1->fetch(PDO::FETCH_ASSOC);
+        $last_month_balance = $last_month ? $last_month['c_last_month_balance'] : 0;
+
+        $stmt2 = $connect->prepare("SELECT 
+    (SELECT COALESCE(SUM(c_balance), 0) 
+    FROM `v_monthly_balance` 
+    WHERE c_username = curr.c_username 
+    AND c_month <= :month) AS c_this_month_balance
+        FROM `v_monthly_balance` curr
+        WHERE curr.c_month = :month
+        AND curr.c_username = :username;
+    ");
+
+        $stmt2->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt2->bindParam(':last_month', $last_month, PDO::PARAM_STR);
+        $stmt2->bindParam(':month', $month, PDO::PARAM_STR);
+        $stmt2->execute();
+        $this_month = $stmt2->fetch(PDO::FETCH_ASSOC);
+        $this_month_balance = $this_month ? $this_month['c_this_month_balance'] : 0;
 
         // Fix JSON output keys
-        if ($comparison_result) {
-            echo json_encode([
-                'kekayaan' => $total_balance,
-                'last_month_balance' => $comparison_result['c_last_month_balance'],
-                'this_month_balance' => $comparison_result['c_this_month_balance']
-            ]);
-        } else {
-            echo json_encode([
-                'kekayaan' => 0,
-                'last_month_balance' => 0,
-                'this_month_balance' => 0
-            ]);
-        }
+        echo json_encode([
+            'kekayaan' => $total_balance,
+            'last_month_balance' => $last_month_balance,
+            'this_month_balance' => $this_month_balance
+        ]);
     } catch (PDOException $e) {
         echo json_encode(["error" => $e->getMessage()]);
     }
