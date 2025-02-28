@@ -21,7 +21,12 @@ if ($jwt === null) {
     if ($count > 0) {
         echo "used";
     } else {
-        // delete the category
+        // delete the category from t_budget
+        $stmt = $connect->prepare("DELETE FROM t_budget WHERE c_category = :catId");
+        $stmt->bindParam(':catId', $catId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // delete the category from t_category
         $stmt = $connect->prepare("DELETE FROM t_category WHERE id = :catId");
         $stmt->bindParam(':catId', $catId, PDO::PARAM_INT);
         if ($stmt->execute()) {

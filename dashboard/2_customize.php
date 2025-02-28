@@ -521,6 +521,7 @@
         var catName = $("#edit-cat-name").val();
         var retainCapital = $("#edit-retain-capital").is(":checked");
         var catStatus = $("#edit-status").is(":checked");
+        var catIcon = $("#cat-icon-edit").val();
 
         // Reset error messages
         $("#error-edit-cat-name").hide();
@@ -534,6 +535,7 @@
             $('#edit-status').prop('disabled', true);
             $('#save-edit-category').prop('disabled', true);
             $('#delete-category').prop('disabled', true);
+            $('#cat-icon-edit').prop('disabled', true);
 
             $.ajax({
                 url: "2_data/act_edit_category.php",
@@ -542,7 +544,8 @@
                     catId: catId,
                     catName: catName,
                     retainCapital: retainCapital,
-                    catStatus: catStatus
+                    catStatus: catStatus,
+                    catIcon: catIcon
                 },
                 success: function(response) {
                     $('#edit-cat-name').prop('disabled', false);
@@ -551,6 +554,7 @@
                     $('#edit-status').prop('disabled', false);
                     $('#save-edit-category').prop('disabled', false);
                     $('#delete-category').prop('disabled', false);
+                    $('#cat-icon-edit').prop('disabled', false);
 
                     if (response == "success") {
                         Swal.fire({

@@ -14,6 +14,7 @@ if ($jwt === null) {
     $catName = $_POST['catName'];
     $catStatus = $_POST['catStatus'];
     $retainCapital = $_POST['retainCapital'];
+    $icon = $_POST['catIcon'] ?? null;
 
     // change all characters to lowercase
     if ($retainCapital == "true") {
@@ -24,11 +25,17 @@ if ($jwt === null) {
     $catStatus = $catStatus == "true" ? "active" : "inactive";
     $username = $user['username'];
 
-    // check the category name and type in database
-    $stmt = $connect->prepare("UPDATE t_category SET c_name = :catName, c_status = :catStatus WHERE id = :catId");
+    // prepare SQL query
+    if ($icon !== null) {
+        $stmt = $connect->prepare("UPDATE t_category SET c_name = :catName, c_status = :catStatus, c_icon = :catIcon WHERE id = :catId");
+        $stmt->bindParam(':catIcon', $icon);
+    } else {
+        $stmt = $connect->prepare("UPDATE t_category SET c_name = :catName, c_status = :catStatus WHERE id = :catId");
+    }
     $stmt->bindParam(':catName', $catName);
     $stmt->bindParam(':catStatus', $catStatus);
     $stmt->bindParam(':catId', $catId);
+
     if ($stmt->execute()) {
         echo "success";
     } else {
