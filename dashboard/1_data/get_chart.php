@@ -88,14 +88,19 @@ if ($jwt === null) {
         </script>
     <?php
     } elseif ($type_chart == 'balance') {
-        $stmt = $connect->prepare("SELECT c_total_income, c_total_outcome FROM v_monthly_balance WHERE c_username = :username AND c_month = :monthe");
+        $stmt = $connect->prepare("SELECT c_total_income, c_total_outcome FROM v_monthly_balance WHERE c_username = :username AND c_month = :month");
         $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':monthe', $month);
+        $stmt->bindParam(':month', $month);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $pemasukan = $result[0]['c_total_income'];
-        $pengeluaran = $result[0]['c_total_outcome'];
+        if (empty($result)) {
+            $pemasukan = 0;
+            $pengeluaran = 0;
+        } else {
+            $pemasukan = $result[0]['c_total_income'];
+            $pengeluaran = $result[0]['c_total_outcome'];
+        }
     ?>
         <div id="bancance" style="height:500px; width: 100%; margin-top: 20px;"></div>
         <script>

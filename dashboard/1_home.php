@@ -27,7 +27,7 @@
         <hr>
         <div class="row">
             <div class="col-12">
-                <input type="month" name="select-last-month" onchange="getKekayaanLastMonth(),getDataReportByMonth()" id="select-last-month" class="form-control mb-3" style="width: 50%; display: none;">
+                <input type="month" name="select-last-month" onchange="getKekayaanLastMonth(),getDataReportByMonth(),loadReportLastMonth()" id="select-last-month" class="form-control mb-3" style="width: 50%; display: none;">
                 <table style="width: 100%; border-collapse: collapse;">
                     <tr style="margin: 0; padding: 0;">
                         <td style="margin: 0; padding: 0;">Saldo awal</td>
@@ -1298,6 +1298,11 @@
         $('#data-cari-table').hide();
 
     });
+
+    // function to trigger laporan balance in report last month
+    function loadReportLastMonth() {
+        $('#laporan-balance').trigger('click');
+    }
 
     $('#laporan-balance').click(function() {
         $('#laporan-balance').removeClass('btn-primary').addClass('btn-secondary').prop('disabled', true);
