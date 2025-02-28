@@ -63,7 +63,7 @@ if (!$result) {
                 $mail->Host       = 'smtp.hostinger.com';                    // Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
                 $mail->Username   = 'information_system@duit.adzkasfr.com';                     // SMTP username
-                $mail->Password   = 'xxxxx';                               // SMTP password
+                $mail->Password   = 'Alfianwai1!';                               // SMTP password
                 $mail->SMTPSecure = 'ssl';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
                 $mail->Port       = 465;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
