@@ -62,7 +62,7 @@
     <button id="cari-data-page" class="btn btn-sm btn-primary" style="font-size: 0.6em; width: 20%;">Cari data</button>
 </div>
 
-<div id="data-laporan" class="card mb-4 mt-2" style="padding-left: 0px; padding-right: 0px; display: none;">
+<div id="data-laporan" class="card mb-5 mt-2" style="padding-left: 0px; padding-right: 0px; display: none; margin-bottom: 50px;">
     <div class="card-body">
         <div class="row">
             <div class="col-12 text-center">
@@ -83,7 +83,7 @@
     </div>
 </div>
 
-<div id="data-input" style="display: none;">
+<div id="data-input" style="display: none; margin-bottom: 50px;">
     <div class="card mt-2" style="padding-left: 0px; padding-right: 0px;">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
@@ -299,13 +299,13 @@
     </div>
 </div>
 
-<div id="data-report" style="text-align: center; display:none;">
+<div id="data-report" style="text-align: center; display:none; margin-bottom: 50px;">
 </div>
 <div id="data-report-loading" style="text-align: center; margin-top: 50px;">
     <i class="fa-solid fa-circle-notch fa-spin"></i>
 </div>
 
-<div id="data-cari" style="display: none;">
+<div id="data-cari" style="display: none; margin-bottom: 50px;">
     <div class="card mt-2" style="padding-left: 0px; padding-right: 0px;">
         <div class="card-body pt-0">
             <div class="row">
@@ -374,7 +374,7 @@
     </div>
 </div>
 
-<hr style="margin-bottom: 50px;">
+<hr>
 
 <button class="btn btn-primary btn-floating" id="add-data" style="position: fixed; bottom: 80px; right: 20px;">
     <i class="fa fa-plus"></i>

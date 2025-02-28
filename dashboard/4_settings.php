@@ -1,4 +1,4 @@
-<div class="card mb-3 mt-3" style="padding-left: 0px; padding-right: 0px;">
+<div class="card mb-3 mt-3 mb-5" style="padding-left: 0px; padding-right: 0px; margin-bottom: 50px;">
     <div class="card-body">
         <div class="row">
             <div class="col-12">
@@ -62,6 +62,8 @@
         </div>
     </div>
 </div>
+
+<hr>
 
 <script>
     $(document).ready(function() {
