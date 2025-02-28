@@ -39,21 +39,23 @@ if ($jwt === null) {
      WHERE c_username = curr.c_username 
      AND c_month <= :month) AS c_this_month_balance,
 
-    -- Difference calculation
-    ((SELECT COALESCE(SUM(c_balance), 0) 
-      FROM `v_monthly_balance` 
-      WHERE c_username = curr.c_username 
-      AND c_month <= :month)
+    -- Difference calculation with explicit handling when this month has no data
+    (COALESCE(
+        (SELECT SUM(c_balance) 
+         FROM `v_monthly_balance` 
+         WHERE c_username = curr.c_username 
+         AND c_month <= :month), 0) 
      - 
-     (SELECT COALESCE(SUM(c_balance), 0) 
-      FROM `v_monthly_balance` 
-      WHERE c_username = curr.c_username 
-      AND c_month <= :last_month)
+     COALESCE(
+        (SELECT SUM(c_balance) 
+         FROM `v_monthly_balance` 
+         WHERE c_username = curr.c_username 
+         AND c_month <= :last_month), 0)
     ) AS c_difference
 
-        FROM `v_monthly_balance` curr
-        WHERE curr.c_month = :month
-        AND curr.c_username = :username;
+FROM `v_monthly_balance` curr
+WHERE curr.c_month = :month
+AND curr.c_username = :username;
         ");
 
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
