@@ -35,7 +35,7 @@ if ($user) {
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
-<body>
+<body style="background-image: url('<?php echo base_url('assets/images/money_burn.png'); ?>'); background-size: cover; background-repeat: no-repeat;">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
