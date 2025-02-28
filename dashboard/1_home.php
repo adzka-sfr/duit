@@ -450,7 +450,8 @@
                 $('#difference-balance-loading').hide();
                 $('#difference-balance').show();
                 var response = JSON.parse(response);
-                var formattedKekayaan = parseInt(response.kekayaan).toLocaleString('en-US');
+                // var formattedKekayaan = parseInt(response.kekayaan).toLocaleString('en-US');
+                var formattedKekayaan = 0;
                 $('#kekayaan').html('<sup>Rp</sup> ' + formattedKekayaan);
                 $('#last-month-balance').html('<sup>Rp</sup> ' + parseInt(response.last_month_balance).toLocaleString('en-US'));
                 $('#this-month-balance').html('<sup>Rp</sup> ' + parseInt(response.this_month_balance).toLocaleString('en-US'));
