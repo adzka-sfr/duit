@@ -1301,7 +1301,7 @@
 
     // function to trigger laporan balance in report last month
     function loadReportLastMonth() {
-        $('#laporan-balance').trigger('click');
+        $('#input-page').trigger('click');
     }
 
     $('#laporan-balance').click(function() {
