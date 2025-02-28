@@ -450,8 +450,6 @@
                 $('#difference-balance-loading').hide();
                 $('#difference-balance').show();
                 var response = JSON.parse(response);
-                console.log(response.error);
-
                 var formattedKekayaan = parseInt(response.kekayaan).toLocaleString('en-US');
                 $('#kekayaan').html('<sup>Rp</sup> ' + formattedKekayaan);
                 $('#last-month-balance').html('<sup>Rp</sup> ' + parseInt(response.last_month_balance).toLocaleString('en-US'));
