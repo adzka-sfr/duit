@@ -1,6 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/connect.php'; // local
-// require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php'; // hosting
+// require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/connect.php'; // local
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php'; // hosting
 
 $user = require_once base_path('config/check_cookie.php');
 

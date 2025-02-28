@@ -4,10 +4,10 @@ $jwt = $_COOKIE['duit_token'] ?? null;
 if ($jwt === null) {
     echo "cookie_expired";
 } else {
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/connect.php'; // local
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/check_cookie.php'; // local
-    // require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php'; // hosting
-    // require_once $_SERVER['DOCUMENT_ROOT'] . '/config/check_cookie.php'; // hosting
+    // require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/connect.php'; // local
+    // require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/check_cookie.php'; // local
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php'; // hosting
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/config/check_cookie.php'; // hosting
 
     // get data post
     $month = $_POST['month'];

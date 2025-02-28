@@ -3,16 +3,16 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/connect.php'; // local
-// require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php'; // hosting
+// require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/connect.php'; // local
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php'; // hosting
 
-require $_SERVER['DOCUMENT_ROOT'] . '/duit/assets/PHPMailer/src/PHPMailer.php'; // local
-require $_SERVER['DOCUMENT_ROOT'] . '/duit/assets/PHPMailer/src/Exception.php'; // local
-require $_SERVER['DOCUMENT_ROOT'] . '/duit/assets/PHPMailer/src/SMTP.php'; // local
+// require $_SERVER['DOCUMENT_ROOT'] . '/duit/assets/PHPMailer/src/PHPMailer.php'; // local
+// require $_SERVER['DOCUMENT_ROOT'] . '/duit/assets/PHPMailer/src/Exception.php'; // local
+// require $_SERVER['DOCUMENT_ROOT'] . '/duit/assets/PHPMailer/src/SMTP.php'; // local
 
-// require $_SERVER['DOCUMENT_ROOT'] . '/assets/PHPMailer/src/PHPMailer.php'; // hosting
-// require $_SERVER['DOCUMENT_ROOT'] . '/assets/PHPMailer/src/Exception.php'; // hosting
-// require $_SERVER['DOCUMENT_ROOT'] . '/assets/PHPMailer/src/SMTP.php'; // hosting
+require $_SERVER['DOCUMENT_ROOT'] . '/assets/PHPMailer/src/PHPMailer.php'; // hosting
+require $_SERVER['DOCUMENT_ROOT'] . '/assets/PHPMailer/src/Exception.php'; // hosting
+require $_SERVER['DOCUMENT_ROOT'] . '/assets/PHPMailer/src/SMTP.php'; // hosting
 
 // get data post
 $email = $_POST['email'];

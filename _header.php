@@ -1,8 +1,8 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/connect.php'; // local
-require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/check_cookie.php'; // local
-// require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php'; // hosting
-// require_once $_SERVER['DOCUMENT_ROOT'] . '/config/check_cookie.php'; // hosting
+// require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/connect.php'; // local
+// require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/check_cookie.php'; // local
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php'; // hosting
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config/check_cookie.php'; // hosting
 
 // Assuming $user['theme'] is already set and contains the color code
 $themeColor = isset($user['theme']) ? $user['theme'] : '#007bff'; // Default to blue if not set
