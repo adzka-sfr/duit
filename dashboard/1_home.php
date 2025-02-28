@@ -450,7 +450,7 @@
                 $('#difference-balance-loading').hide();
                 $('#difference-balance').show();
                 var response = JSON.parse(response);
-                console.log(response.kekayaan);
+                console.log(response.error);
 
                 var formattedKekayaan = parseInt(response.kekayaan).toLocaleString('en-US');
                 $('#kekayaan').html('<sup>Rp</sup> ' + formattedKekayaan);
