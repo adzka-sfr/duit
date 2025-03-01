@@ -110,7 +110,7 @@ if ($jwt === null) {
 
             option = {
                 title: {
-                    text: 'Pemasukan X Pengeluaran',
+                    text: 'Pengeluaran X Pemasukan',
                     subtext: 'Bulan : <?= $month ?>',
                     left: 'right'
                 },
@@ -142,11 +142,11 @@ if ($jwt === null) {
                     data: ['<?= date('M', strtotime($month)) ?>']
                 },
                 series: [{
-                        name: 'Pemasukan',
+                        name: 'Pengeluaran',
                         type: 'bar',
-                        data: [<?= $pemasukan ?>],
+                        data: [<?= $pengeluaran ?>],
                         itemStyle: {
-                            color: '#91CC75'
+                            color: '#EE6666'
                         },
                         label: {
                             show: true,
@@ -158,11 +158,11 @@ if ($jwt === null) {
                         }
                     },
                     {
-                        name: 'Pengeluaran',
+                        name: 'Pemasukan',
                         type: 'bar',
-                        data: [<?= $pengeluaran ?>],
+                        data: [<?= $pemasukan ?>],
                         itemStyle: {
-                            color: '#EE6666'
+                            color: '#91CC75'
                         },
                         label: {
                             show: true,
