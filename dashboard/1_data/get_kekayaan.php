@@ -24,34 +24,32 @@ if ($jwt === null) {
 
         // Second query to get monthly comparison data
         $stmt1 = $connect->prepare("SELECT SUM(c_balance) AS c_last_month_balance
-                                    FROM `v_monthly_balance` 
-                                    WHERE c_username = curr.c_username 
-                                    AND c_month <= :last_month");
+                            FROM `v_monthly_balance` 
+                            WHERE c_username = :username 
+                            AND c_month <= :last_month");
 
         $stmt1->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt1->bindParam(':last_month', $last_month, PDO::PARAM_STR);
         $stmt1->execute();
         $last_month = $stmt1->fetch(PDO::FETCH_ASSOC);
-        $last_month_balance = $last_month ? $last_month['c_last_month_balance'] : 0;
+        $last_month_balance = $last_month && isset($last_month['c_last_month_balance']) ? $last_month['c_last_month_balance'] : 0;
 
         $stmt2 = $connect->prepare("SELECT SUM(c_balance) AS c_this_month_balance
-                                    FROM `v_monthly_balance` 
-                                    WHERE c_username = curr.c_username 
-                                    AND c_month <= :month");
+                            FROM `v_monthly_balance` 
+                            WHERE c_username = :username 
+                            AND c_month <= :month");
 
         $stmt2->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt2->bindParam(':month', $month, PDO::PARAM_STR);
         $stmt2->execute();
         $this_month = $stmt2->fetch(PDO::FETCH_ASSOC);
-        $this_month_balance = $this_month ? $this_month['c_this_month_balance'] : 0;
+        $this_month_balance = $this_month && isset($this_month['c_this_month_balance']) ? $this_month['c_this_month_balance'] : 0;
 
         // Fix JSON output keys
         echo json_encode([
             'kekayaan' => $total_balance,
-            'last_month_balance' => 0,
-            'this_month_balance' => 0
-            // 'last_month_balance' => $last_month_balance,
-            // 'this_month_balance' => $this_month_balance
+            'last_month_balance' => $last_month_balance,
+            'this_month_balance' => $this_month_balance
         ]);
     } catch (PDOException $e) {
         echo json_encode(["error" => $e->getMessage()]);
