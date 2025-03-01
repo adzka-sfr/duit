@@ -48,8 +48,10 @@ if ($jwt === null) {
         // Fix JSON output keys
         echo json_encode([
             'kekayaan' => $total_balance,
-            'last_month_balance' => $last_month_balance,
-            'this_month_balance' => $this_month_balance
+            'last_month_balance' => 0,
+            'this_month_balance' => 0
+            // 'last_month_balance' => $last_month_balance,
+            // 'this_month_balance' => $this_month_balance
         ]);
     } catch (PDOException $e) {
         echo json_encode(["error" => $e->getMessage()]);
