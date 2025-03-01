@@ -1236,8 +1236,15 @@
                         title: 'Berhasil',
                         text: 'Data berhasil diupdate',
                     });
-                    getDataReportByMonth();
-                    getKekayaanLastMonth();
+
+                    if ($('#last-month-nav').hasClass('font-weight-bold')) {
+                        getDataReportByMonth();
+                        getKekayaanLastMonth();
+                    } else {
+                        getDataReport();
+                        getKekayaan();
+                    }
+
                     $('#modal-lihat-transaksi').modal('hide');
                 }
             }
