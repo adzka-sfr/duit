@@ -14,7 +14,7 @@ if ($jwt === null) {
 
     $username = $user['username'];
 
-    $stmt = $connect->prepare("SELECT c_date, c_datetime, c_detail, c_nominal, c_category_name, c_status FROM v_transaction WHERE c_username = :username AND c_detail LIKE '%$kata_kunci%' ORDER BY c_datetime DESC");
+    $stmt = $connect->prepare("SELECT c_date, c_datetime, c_detail, c_nominal, c_category_name, c_status FROM v_transaction WHERE c_username = :username AND c_detail LIKE '%$kata_kunci%' OR c_username = :username AND c_category_name LIKE '%$kata_kunci%' ORDER BY c_datetime DESC");
     $stmt->bindParam(':username', $username);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -32,26 +32,26 @@ if ($jwt === null) {
             <?php
             if (empty($result)) {
             ?>
-            <tr>
-                <td colspan="3" style="text-align: center;">Tidak ada data</td>
-            </tr>
-            <?php
-            } else {
-            foreach ($result as $data) {
-            ?>
                 <tr>
-                <td style="text-align: center;"><?php echo $data['c_date']; ?></td>
-                <td style="text-align: right;"><?php echo number_format($data['c_nominal'], 0, ',', ','); ?></td>
-                <td>
-                    Kategori: <?php echo $data['c_category_name']; ?><br>
-                    Status: <span class="<?php echo $data['c_status'] === 'pengeluaran' ? 'text-danger' : 'text-success'; ?>">
-                    <?php echo $data['c_status']; ?>
-                    </span><br>
-                    Detail: <?php echo $data['c_detail']; ?>
-                </td>
+                    <td colspan="3" style="text-align: center;">Tidak ada data</td>
                 </tr>
+                <?php
+            } else {
+                foreach ($result as $data) {
+                ?>
+                    <tr>
+                        <td style="text-align: center;"><?php echo $data['c_date']; ?></td>
+                        <td style="text-align: right;"><?php echo number_format($data['c_nominal'], 0, ',', ','); ?></td>
+                        <td>
+                            Kategori: <?php echo $data['c_category_name']; ?><br>
+                            Status: <span class="<?php echo $data['c_status'] === 'pengeluaran' ? 'text-danger' : 'text-success'; ?>">
+                                <?php echo $data['c_status']; ?>
+                            </span><br>
+                            Detail: <?php echo $data['c_detail']; ?>
+                        </td>
+                    </tr>
             <?php
-            }
+                }
             }
             ?>
         </tbody>
