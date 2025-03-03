@@ -24,7 +24,7 @@ if ($jwt === null) {
     $stmt_dates->execute();
     $distinct_dates = $stmt_dates->fetchAll(PDO::FETCH_ASSOC);
 
-    $query = "SELECT id, c_datetime, c_date, c_detail, c_nominal, c_category_name, c_category_icon, c_status 
+    $query = "SELECT id, c_datetime, c_date, c_detail, c_nominal, c_category_name,c_payment_name, c_category_icon, c_status 
               FROM v_transaction 
               WHERE c_username = :username AND DATE_FORMAT(c_date, '%Y-%m') = :monthe
               ORDER BY c_datetime DESC";
@@ -107,7 +107,7 @@ if ($jwt === null) {
                                     </div>
                                     <div class="row">
                                         <div class="col-12" style="font-size: 0.5em; color: darkgrey;">
-                                            <?= date('H:i', strtotime($transaction['c_datetime'])) ?>
+                                            <?= date('H:i', strtotime($transaction['c_datetime'])) ?> - <?= $transaction['c_payment_name'] ?>
                                         </div>
                                     </div>
                                 </td>
