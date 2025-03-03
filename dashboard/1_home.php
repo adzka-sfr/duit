@@ -6,7 +6,13 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-12 mt-0 mb-3 text-center">
+                <button id="lihat-nominal" class="btn btn-sm btn-primary" style="font-size: 0.5em;"><i class="fa-solid fa-eye"></i></button>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-12 text-center mb-0">
+                <h3 id='kekayaan-hide' class="mb-0" style="display: none;"><sup>Rp</sup></h3>
                 <h3 id='kekayaan' class="mb-0" style="display: none;"><sup>Rp</sup></h3>
                 <h3 id="kekayaan-loading"><i class="fa-solid fa-circle-notch fa-spin"></i></h3>
             </div>
@@ -431,6 +437,7 @@
     function getKekayaan() {
         $('#kekayaan-loading').show();
         $('#kekayaan').hide();
+        $('#kekayaan-hide').hide();
         $('#last-month-balance-loading').show();
         $('#last-month-balance').hide();
         $('#this-month-balance-loading').show();
@@ -442,7 +449,7 @@
             type: 'POST',
             success: function(response) {
                 $('#kekayaan-loading').hide();
-                $('#kekayaan').show();
+                $('#kekayaan-hide').show();
                 $('#last-month-balance-loading').hide();
                 $('#last-month-balance').show();
                 $('#this-month-balance-loading').hide();
@@ -451,6 +458,8 @@
                 $('#difference-balance').show();
                 var response = JSON.parse(response);
                 var formattedKekayaan = parseInt(response.kekayaan).toLocaleString('en-US');
+                var formattedKekayaanHide = '*'.repeat(formattedKekayaan.length);
+                $('#kekayaan-hide').html('<sup>Rp</sup> ' + formattedKekayaanHide);
                 $('#kekayaan').html('<sup>Rp</sup> ' + formattedKekayaan);
                 $('#last-month-balance').html('<sup>Rp</sup> ' + parseInt(response.last_month_balance).toLocaleString('en-US'));
                 $('#this-month-balance').html('<sup>Rp</sup> ' + parseInt(response.this_month_balance).toLocaleString('en-US'));
@@ -465,6 +474,12 @@
             }
         });
     }
+
+    // function to show and hide kekayaan
+    $('#lihat-nominal').click(function() {
+        $('#kekayaan').toggle();
+        $('#kekayaan-hide').toggle();
+    });
 
     // functioni to get kekayaan by month
     function getKekayaanLastMonth() {
