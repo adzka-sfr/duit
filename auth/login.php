@@ -27,7 +27,7 @@
         </div>
 
         <div class="form-group text-center mt-3" style="font-size: 0.8em;">
-            Owner Apps <br><a href="https://adzkasfr.com">Adzka SFR</a>
+           Application Owner <br><a href="https://adzkasfr.com">Adzka SFR</a>
         </div>
     </div>
 </div>
