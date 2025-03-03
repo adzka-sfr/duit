@@ -499,8 +499,10 @@
         var month = $('#select-last-month').val();
         $('#last-month-balance-loading').show();
         $('#last-month-balance').hide();
+        $('#last-month-balance-hide').hide();
         $('#this-month-balance-loading').show();
         $('#this-month-balance').hide();
+        $('#this-month-balance-hide').hide();
         $('#difference-balance-loading').show();
         $('#difference-balance').hide();
         $.ajax({
