@@ -487,6 +487,10 @@
     $('#lihat-nominal').click(function() {
         $('#kekayaan').toggle();
         $('#kekayaan-hide').toggle();
+        $('#last-month-balance').toggle();
+        $('#last-month-balance-hide').toggle();
+        $('#this-month-balance').toggle();
+        $('#this-month-balance-hide').toggle();
     });
 
     // functioni to get kekayaan by month
