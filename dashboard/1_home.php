@@ -38,11 +38,13 @@
                     <tr style="margin: 0; padding: 0;">
                         <td style="margin: 0; padding: 0;">Saldo awal</td>
                         <td style="text-align: right; margin: 0; padding: 0; display:none;" id="last-month-balance"></td>
+                        <td style="text-align: right; margin: 0; padding: 0; display:none;" id="last-month-balance-hide"></td>
                         <td style="text-align: right; margin: 0; padding: 0;" id="last-month-balance-loading"><sup>Rp</sup> <i class="fa-solid fa-circle-notch fa-spin"></i></td>
                     </tr>
                     <tr style="margin: 0; padding: 0;">
                         <td style="margin: 0; padding: 0;">Saldo akhir</td>
                         <td style="text-align: right; margin: 0; padding: 0; display:none;" id="this-month-balance"></td>
+                        <td style="text-align: right; margin: 0; padding: 0; display:none;" id="this-month-balance-hide"></td>
                         <td style="text-align: right; margin: 0; padding: 0;" id="this-month-balance-loading"><sup>Rp</sup> <i class="fa-solid fa-circle-notch fa-spin"></i></td>
                     </tr>
                     <tr style="margin: 0; padding: 0;">
@@ -440,8 +442,10 @@
         $('#kekayaan-hide').hide();
         $('#last-month-balance-loading').show();
         $('#last-month-balance').hide();
+        $('#last-month-balance-hide').hide();
         $('#this-month-balance-loading').show();
         $('#this-month-balance').hide();
+        $('#this-month-balance-hide').hide();
         $('#difference-balance-loading').show();
         $('#difference-balance').hide();
         $.ajax({
@@ -451,15 +455,19 @@
                 $('#kekayaan-loading').hide();
                 $('#kekayaan-hide').show();
                 $('#last-month-balance-loading').hide();
-                $('#last-month-balance').show();
+                $('#last-month-balance-hide').show();
                 $('#this-month-balance-loading').hide();
-                $('#this-month-balance').show();
+                $('#this-month-balance-hide').show();
                 $('#difference-balance-loading').hide();
                 $('#difference-balance').show();
                 var response = JSON.parse(response);
                 var formattedKekayaan = parseInt(response.kekayaan).toLocaleString('en-US');
                 var formattedKekayaanHide = '*'.repeat(formattedKekayaan.length);
+                var formattedlastmonth = '*'.repeat(parseInt(response.last_month_balance).toLocaleString('en-US').length);
+                var formattedthismonth = '*'.repeat(parseInt(response.this_month_balance).toLocaleString('en-US').length);
                 $('#kekayaan-hide').html('<sup>Rp</sup> ' + formattedKekayaanHide);
+                $('#last-month-balance-hide').html('<sup>Rp</sup> ' + formattedlastmonth);
+                $('#this-month-balance-hide').html('<sup>Rp</sup> ' + formattedthismonth);
                 $('#kekayaan').html('<sup>Rp</sup> ' + formattedKekayaan);
                 $('#last-month-balance').html('<sup>Rp</sup> ' + parseInt(response.last_month_balance).toLocaleString('en-US'));
                 $('#this-month-balance').html('<sup>Rp</sup> ' + parseInt(response.this_month_balance).toLocaleString('en-US'));
