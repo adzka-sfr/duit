@@ -12,8 +12,9 @@
         </div> -->
         <div class="row">
             <div class="col-12 text-center mb-0">
-                <!-- <h3 id='kekayaan-hide' class="mb-0" style="display: none;"><sup>Rp</sup></h3> -->
-                <!-- <h3 id='kekayaan' class="mb-0" style="display: none;"><sup>Rp</sup></h3> -->
+                <!-- <h3 id='kekayaan-hide' class="mb-0" style="display: none;"><sup>Rp</sup></h3>
+                <h3 id='kekayaan' class="mb-0" style="display: none;"><sup>Rp</sup></h3> -->
+                <h3 id='kekayaan-hide' class="mb-0"><sup>Rp</sup></h3>
                 <h3 id='kekayaan' class="mb-0"><sup>Rp</sup></h3>
                 <h3 id="kekayaan-loading"><i class="fa-solid fa-circle-notch fa-spin"></i></h3>
             </div>
