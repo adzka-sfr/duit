@@ -5,15 +5,16 @@
                 Kekayaan
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-12 mt-0 mb-3 text-center">
                 <button id="lihat-nominal" class="btn btn-sm btn-primary" style="font-size: 0.5em;"><i class="fa-solid fa-eye"></i></button>
             </div>
-        </div>
+        </div> -->
         <div class="row">
             <div class="col-12 text-center mb-0">
-                <h3 id='kekayaan-hide' class="mb-0" style="display: none;"><sup>Rp</sup></h3>
-                <h3 id='kekayaan' class="mb-0" style="display: none;"><sup>Rp</sup></h3>
+                <!-- <h3 id='kekayaan-hide' class="mb-0" style="display: none;"><sup>Rp</sup></h3> -->
+                <!-- <h3 id='kekayaan' class="mb-0" style="display: none;"><sup>Rp</sup></h3> -->
+                <h3 id='kekayaan' class="mb-0"><sup>Rp</sup></h3>
                 <h3 id="kekayaan-loading"><i class="fa-solid fa-circle-notch fa-spin"></i></h3>
             </div>
         </div>
